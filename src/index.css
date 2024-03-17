@@ -1,0 +1,24 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Bowlby+One+SC&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Hammersmith+One&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer components{
+  .navbar-icon {
+      @apply relative flex items-center justify-center text-crimson font-bold rounded-md
+       hover:text-ivory h-12 w-12 mt-2 mb-2 hover:bg-crimson  hover:rounded-2xl bg-royalblue
+       transition-all duration-200 ease-linear cursor-pointer ;    
+  }
+  .navbar-tooltip{
+    @apply absolute ml-72 bg-black h-10 w-36 pt-2 pl-5 rounded-md font-text
+     text-ivory font-bold transition-all duration-200 scale-0 origin-left;
+  }
+  .Home-navbar {
+      @apply  flex items-center justify-center text-crimson h-10 w-48  rounded-xl 
+       hover:text-ivory ml-5 mr-3 hover:bg-crimson hover:rounded-xl hover:bg-opacity-80
+       transition-all duration-200 ease-linear cursor-pointer ;    
+  }
+}
