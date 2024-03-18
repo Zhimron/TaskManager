@@ -1,5 +1,7 @@
 import React, { memo } from 'react'
 import HomeNavbar from "../assets/Components/HomeNavbar";
+import { motion } from "framer-motion";
+
 
 const AboutUs = memo(() => {
   return (
@@ -7,9 +9,18 @@ const AboutUs = memo(() => {
       <HomeNavbar />
       <div className="w-full h-full flex justify-center p-10  ">
         <div className="flex flex-col items-center w-2/3 rounded-lg">
-          <img
+          <motion.img
             src="/src/assets/pictures/walrus.png"
             className="w-40 h-40  mb-10"
+            initial={{ rotate: -1, rotate: 5 }}
+            animate={{ rotate: 0 }}
+            transition={{
+              rotate: {
+                type: "spring",
+                repeat: Infinity,
+                repeatType: "reverse",
+              },
+            }}
           />
           {/* <h1 className="text-serenity font-light  text-4xl font-text whitespace-normal indent-10 text-wrap">
             Welcome to TuskManager, your premier destination for overseeing and
@@ -18,7 +29,7 @@ const AboutUs = memo(() => {
             ensuring your employees stay on the right trunk of productivity.
             Let's tuskle through those tasks together!
           </h1> */}
-          <h1 className="text-serenity font-light  text-4xl font-text whitespace-normal indent-10 text-wrap">
+          <h1 className="text-serenity font-light  text-4xl font-text whitespace-normal text-center text-wrap tracking-wide">
             TuskManager is the brainchild of a passionate team committed to
             simplifying task management for businesses of all sizes. Our
             platform is designed to be intuitive, efficient, and flexible,
