@@ -5,6 +5,7 @@ import Navbar from './assets/Components/Navbar';
 import Home from './landing/Home';
 import AboutUs from './landing/AboutUs';
 
+
 function App() {
   const [count, setCount] = useState(0)
 
@@ -13,9 +14,10 @@ function App() {
       <BrowserRouter>
         {/* <Navbar/> */}
         <Routes>
+        
           <Route path="/Login" element={<Login />} />
           <Route path="/" element={<Home />} />
-          <Route path="/Aboutus" element={<AboutUs/>} />
+          <Route path="/Aboutus" element={<AboutUs />} />
         </Routes>
       </BrowserRouter>
     </>

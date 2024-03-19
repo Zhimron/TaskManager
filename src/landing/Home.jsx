@@ -18,10 +18,10 @@ const Home = memo(() => {
               },
             }}
           >
-            Unleash the power of productivity with TuskManager{" "}
+            Unleash the power of productivity with TuskManager {" "}
           </motion.h1>
           <motion.h1
-            className=" text-crimson font-medium text-4xl font-text mt-5 tracking-tighter"
+            className=" text-crimson font-medium text-4xl font-text mt-5 tracking-wide"
             initial={{ y: 200 }}
             animate={{ y: 0 }}
             transition={{
