@@ -7,14 +7,13 @@ import AboutUs from './landing/AboutUs';
 
 
 function App() {
-  const [count, setCount] = useState(0)
+  
 
   return (
     <>
       <BrowserRouter>
         {/* <Navbar/> */}
         <Routes>
-        
           <Route path="/Login" element={<Login />} />
           <Route path="/" element={<Home />} />
           <Route path="/Aboutus" element={<AboutUs />} />
