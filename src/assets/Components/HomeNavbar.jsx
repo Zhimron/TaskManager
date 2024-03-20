@@ -6,12 +6,12 @@ export class HomeNavbar extends Component {
   render() {
     return (
       <div className="shadow-md w-screen h-20 pb-5 pl-5 pt-5 flex justify-between bg-royalblue bg-opacity-50">
-        <div className="font-bold font-body text-3xl text-royalblue ml-14 ">
+        <div className="font-bold font-body md:text-3xl text-royalblue md:ml-14 ">
          
             Tusk Manager 
         
         </div>
-        <div className=" flex font-body font-medium text-xl mr-14">
+        <div className=" flex font-body font-medium text-xl mr-14 scale-0 md:scale-100">
           <NavLink to="/">
             <HomeNavBarIcon text={"Home"} />
           </NavLink>

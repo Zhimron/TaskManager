@@ -6,10 +6,10 @@ const Home = memo(() => {
   return (
     <div className=" w-screen h-screen bg-gradient-to-t from-royalblue to-ivory flex flex-col items-center">
       <HomeNavbar />
-      <div className="w-full h-full  ">
-        <div className=" items-center text-center pt-20">
+      <div className="w-screen h-screen ">
+        <div className=" items-center text-center pt-20 w-screen ">
           <motion.h1
-            className="text-ivory font-medium text-8xl font-body pt-20 tracking-wider "
+            className="text-ivory font-medium font-body pt-20 tracking-wider text-3xl md:text-8xl"
             initial={{ y: -200 }}
             animate={{ y: 0 }}
             transition={{
@@ -18,10 +18,10 @@ const Home = memo(() => {
               },
             }}
           >
-            Unleash the power of productivity with TuskManager {" "}
+            Unleash the power of productivity with TuskManager{" "}
           </motion.h1>
           <motion.h1
-            className=" text-crimson font-medium text-4xl font-text mt-5 tracking-wide"
+            className=" text-crimson font-medium md:text-4xl text-xl font-text mt-5 tracking-wide"
             initial={{ y: 200 }}
             animate={{ y: 0 }}
             transition={{

@@ -17,12 +17,12 @@ const AboutUs = memo(() => {
   return (
     <div className=" w-screen h-screen bg-gradient-to-t from-royalblue to-ivory flex flex-col items-center">
       <HomeNavbar />
-      <div className="w-full h-full flex justify-center p-10  ">
-        <div className="flex flex-col items-center w-2/3 rounded-lg">
+      <div className="w-full h-full flex justify-center md:p-10  ">
+        <div className="flex flex-col items-center md:w-2/3 rounded-lg">
           <motion.img
             src="/src/assets/pictures/walrus.png"
-            className="w-40 h-40  mb-10"
-            initial={{ rotate: -5}}
+            className="md:w-1/6 md:h-1/4 w-2/5 h-1/6  mb-10"
+            initial={{ rotate: -5 }}
             animate={{ rotate: 0 }}
             transition={{
               rotate: {
@@ -40,7 +40,7 @@ const AboutUs = memo(() => {
             Let's tuskle through those tasks together!
           </h1> */}
           <motion.h1
-            className="text-serenity font-light  text-4xl font-text whitespace-normal text-center text-wrap tracking-wider "
+            className="text-serenity font-light text-2xl md:text-4xl font-text whitespace-normal text-center text-wrap tracking-wider "
             initial={{ y: 200 }}
             animate={{ y: 0 }}
             transition={{
@@ -56,19 +56,17 @@ const AboutUs = memo(() => {
               onHoverStart={onHover}
               onHoverEnd={outHover}
               className="font-bold text-crimson"
-
             >
               together!{" "}
             </motion.span>
           </motion.h1>
           {focus && (
             <motion.img
-              initial={{ y: 50}}
-              animate={{ y: 0 }}
-              transition={{duration: 1       
-              }}
+              initial={{ y: -400 }}
+              animate={{ y: -180 }}
+              transition={{ duration: 1 }}
               src="/src/assets/pictures/giphy.gif"
-              className="rounded-3xl mt-5 "
+              className="rounded-3xl mt-5 w-1/2 "
             />
           )}
         </div>
