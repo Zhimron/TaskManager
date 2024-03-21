@@ -6,6 +6,7 @@
   import { motion } from "framer-motion";
   import { MdEmail } from "react-icons/md";
   import { useCustomMutation } from "../Hooks/useCustomMutation";
+import { useNavigate } from "react-router-dom";
 
 
   const Login = memo(() => {
@@ -69,6 +70,21 @@
     toSignUp(false);
     setRegisterError("");
     };
+    const navigate = useNavigate();
+
+   useEffect(() => {
+     if (datalogin && datalogin !== "Unauthorized") {
+       localStorage.setItem("access_token", datalogin.access_token);
+       navigate("/Userform");
+     }
+   }, [datalogin]);
+
+    useEffect(() => {
+      const access_token = localStorage.getItem("access_token");
+      if (access_token) {
+        navigate("/Userform");
+      }
+    }, []);
 
     return (
       <div className="w-screen h-screen bg-royalblue flex justify-center items-center">
@@ -110,7 +126,7 @@
                   onChange={(e) => setPassword(e.target.value)}
                 />
                 {loginerror && (
-                  <p className="text-crimson mt-3">{loginerror}</p>
+                  <p className="text-crimson mt-3 font-text">{loginerror}</p>
                 )}
                 <ButtonComp>log-in</ButtonComp>
               </form>
@@ -177,13 +193,13 @@
                   onChange={(e) => setregReentryPassword(e.target.value)}
                 />
                 {registererror && (
-                  <p className="text-crimson mt-3">{registererror}</p>
+                  <p className="text-crimson mt-3 font-text">{registererror}</p>
                 )}
                 <ButtonComp>Sign-up</ButtonComp>
               </form>
               <button
                 className="w-full flex pt-3  justify-center"
-                onClick={(triggerLogIn)}
+                onClick={triggerLogIn}
               >
                 <h1 className=" font-text tracking-tighter text-black text-xl flex">
                   Log-in <FaArrowRight className="mt-1 ml-2" />
