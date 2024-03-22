@@ -7,6 +7,7 @@
   import { MdEmail } from "react-icons/md";
   import { useCustomMutation } from "../Hooks/useCustomMutation";
 import { useNavigate } from "react-router-dom";
+import RedirectIfLoggedIn from "../utils/RedirectIfLoggedIn";
 
 
   const Login = memo(() => {
@@ -73,21 +74,16 @@ import { useNavigate } from "react-router-dom";
     const navigate = useNavigate();
 
    useEffect(() => {
-     if (datalogin && datalogin !== "Unauthorized") {
+     if (datalogin && datalogin.error !== "Unauthorized") {
        localStorage.setItem("access_token", datalogin.access_token);
        navigate("/Userform");
      }
-   }, [datalogin]);
+   }, [ handleSubmitLog]);
 
-    useEffect(() => {
-      const access_token = localStorage.getItem("access_token");
-      if (access_token) {
-        navigate("/Userform");
-      }
-    }, []);
 
     return (
       <div className="w-screen h-screen bg-royalblue flex justify-center items-center">
+        <RedirectIfLoggedIn/>
         {!signUp && (
           <motion.div
             className="flex justify-center bg-ivory bg-opacity-25 w-2/6 h-2/3 rounded-md"
