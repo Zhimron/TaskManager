@@ -15,9 +15,9 @@ const AboutUs = memo(() => {
 
 
   return (
-    <div className=" w-screen h-screen bg-gradient-to-t from-royalblue to-ivory flex flex-col items-center">
-      <HomeNavbar />
-      <div className="w-full h-full flex justify-center md:p-10  ">
+    <div className=" w-screen h-screen bg-gradient-to-t from-royalblue to-ivory flex flex-col items-center ">
+      {/* <HomeNavbar /> */}
+      <div className="w-full h-full flex justify-center md:p-10 items-center">
         <div className="flex flex-col items-center md:w-2/3 rounded-lg">
           <motion.img
             src="/src/assets/pictures/walrus.png"

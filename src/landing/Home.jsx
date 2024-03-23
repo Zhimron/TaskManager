@@ -4,12 +4,12 @@ import {motion} from "framer-motion"
 
 const Home = memo(() => {
   return (
-    <div className=" w-screen h-screen bg-gradient-to-t from-royalblue to-ivory flex flex-col items-center">
-      <HomeNavbar />
-      <div className="w-screen h-screen ">
-        <div className=" items-center text-center pt-20 w-screen ">
+    <div className=" w-screen h-screen bg-gradient-to-t from-royalblue to-ivory flex flex-col items-center justify-center">
+      {/* <HomeNavbar /> */}
+      <div className="w-screen ">
+        <div className=" items-center text-center w-screen ">
           <motion.h1
-            className="text-ivory font-medium font-body pt-20 tracking-wider text-3xl md:text-8xl"
+            className="text-ivory font-medium font-body  tracking-wider text-3xl md:text-8xl"
             initial={{ y: -200 }}
             animate={{ y: 0 }}
             transition={{

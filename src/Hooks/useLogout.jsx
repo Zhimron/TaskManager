@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 const useLogout = (children) => {
   const navigate = useNavigate();
+
   const handleLogout = async () => {
     try {
       const token = localStorage.getItem("access_token");
@@ -33,13 +34,10 @@ const useLogout = (children) => {
   };
 
   useEffect(() => {
-    if(children !="Logout"){
-      
-    }else{
-       handleLogout();
-       
+    if(children === "Logout"){
+      handleLogout();
     }
-   
+         
   }, []); 
 
   return handleLogout;
