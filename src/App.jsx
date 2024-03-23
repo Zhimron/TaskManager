@@ -10,8 +10,6 @@ import PrivateRoutes from "./utils/PrivateRoutes";
 import { Userlanding } from './Userui/Userlanding';
 import HomeNavbar from './assets/Components/HomeNavbar';
 
-
-
 function App() {
 
   return (

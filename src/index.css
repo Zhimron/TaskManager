@@ -13,8 +13,8 @@
        transition-all duration-200 ease-linear cursor-pointer ;    
   }
   .navbar-tooltip{
-    @apply absolute ml-72 bg-royalblue h-10 w-36 pt-2 pl-5 rounded-md font-text
-     text-ivory font-bold transition-all duration-200 scale-0 origin-left;
+    @apply absolute mr-64 bg-royalblue h-10 w-36 pt-2 pl-5 rounded-md font-text
+     text-ivory font-bold transition-all duration-200 scale-0 origin-right;
   }
   .Home-navbar {
       @apply  flex items-center justify-center text-crimson h-10 w-48  rounded-xl 
