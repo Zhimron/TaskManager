@@ -8,10 +8,11 @@
   import { useCustomMutation } from "../Hooks/useCustomMutation";
 import { useNavigate } from "react-router-dom";
 import RedirectIfLoggedIn from "../utils/RedirectIfLoggedIn";
+import Modal from "../assets/Components/Modal";
 
 
   const Login = memo(() => {
-
+    const [showModal, setshowModal] = useState(false);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [loginerror,setloginError] = useState('');
@@ -72,18 +73,29 @@ import RedirectIfLoggedIn from "../utils/RedirectIfLoggedIn";
     setRegisterError("");
     };
     const navigate = useNavigate();
-
+ 
    useEffect(() => {
-     if (datalogin && datalogin.error !== "Unauthorized") {
-       localStorage.setItem("access_token", datalogin.access_token);
-       navigate("/Userform");
+   let timerId;
+     if (datalogin && datalogin.error !== "Unauthorized") {          
+      localStorage.setItem("access_token", datalogin.access_token);  
+      setshowModal(true);
+      console.log(showModal);
+      timerId = setTimeout(()=>{
+         navigate("/Userform");
+      },5000)
      }
+     return () => {
+       clearTimeout(timerId);
+     };
    }, [ handleSubmitLog]);
 
 
     return (
       <div className="w-screen h-screen bg-royalblue flex justify-center items-center">
-        <RedirectIfLoggedIn/>
+        {/* <Modal /> */}
+        <RedirectIfLoggedIn />
+        {showModal && <Modal />}
+
         {!signUp && (
           <motion.div
             className="flex justify-center bg-ivory bg-opacity-25 w-2/6 h-2/3 rounded-md"

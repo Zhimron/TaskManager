@@ -69,52 +69,59 @@ const access_token = localStorage.getItem("access_token");
         {/* <NavLink to="/Aboutus">
           <HomeNavBarIcon text={"About Us"} onClick={handleChangeBack} />
         </NavLink> */}
-        <NavLink to="/Login">
-          <HomeNavBarIcon text={"Login"} />
-        </NavLink>
+        {!showLogout && (
+          <NavLink to="/Login">
+            <HomeNavBarIcon text={"Login"} />
+          </NavLink>
+        )}
         {/* <div className="Home-navbar">hashash</div> */}
-        <motion.div onClick={handleClick}>
-          <HomeNavBarIcon text={"Menu"} />
-          {showList && (
-            <motion.div
-              initial="hidden"
-              animate="visible"
-              exit="hidden"
-              variants={{
-                hidden: { scale: 0 },
-                visible: { scale: 1 },
-              }}
-              className="bg-red-5 flex flex-col items-end p-5 bg-serenity rounded-2xl  bg-opacity-50  "
-            >
-              <NavBarIcon
-                icon={<FaHome size={30} />}
-                text={"Home"}
-                to={"/Home"}
-              />
-              <NavBarIcon
-                icon={<IoMdAddCircle size={30} />}
-                text={"Add Task"}
-                to={"/Addtask"}
-              />
-              <NavBarIcon
-                icon={<MdOutlineAddTask size={30} />}
-                text={"Assign Task"}
-              />
-              <NavBarIcon icon={<GrTasks size={30} />} text={"Progress"} />
-              <NavBarIcon
-                icon={<MdGroupAdd size={30} />}
-                text={"Create Team"}
-              />
-              <NavBarIcon icon={<FaUserCog size={30} />} text={"User Roles"} />
-            </motion.div>
-          )}
-        </motion.div>
         {showLogout && (
-          <Dropdown
-            information="D"
-            childInfo="Log Out"
-            onClick={handleLogoutClick}
-          />
+          <motion.div onClick={handleClick}>
+            <HomeNavBarIcon text={"Menu"} />
+            {showList && (
+              <motion.div
+                initial="hidden"
+                animate="visible"
+                exit="hidden"
+                variants={{
+                  hidden: { scale: 0 },
+                  visible: { scale: 1 },
+                }}
+                className="bg-red-5 flex flex-col items-end p-5 bg-serenity rounded-2xl  bg-opacity-50  "
+              >
+                <NavBarIcon
+                  icon={<FaHome size={30} />}
+                  text={"Home"}
+                  to={"/Home"}
+                />
+                <NavBarIcon
+                  icon={<IoMdAddCircle size={30} />}
+                  text={"Add Task"}
+                  to={"/Addtask"}
+                />
+                <NavBarIcon
+                  icon={<MdOutlineAddTask size={30} />}
+                  text={"Assign Task"}
+                />
+                <NavBarIcon icon={<GrTasks size={30} />} text={"Progress"} />
+                <NavBarIcon
+                  icon={<MdGroupAdd size={30} />}
+                  text={"Create Team"}
+                />
+                <NavBarIcon
+                  icon={<FaUserCog size={30} />}
+                  text={"User Roles"}
+                />
+              </motion.div>
+            )}
+          </motion.div>
+        )}
+        {showLogout && (
+        <Dropdown
+          information="D"
+          childInfo="Log Out"
+          onClick={handleLogoutClick}
+        />
         )}
       </div>
     </div>
