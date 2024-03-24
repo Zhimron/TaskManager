@@ -16,17 +16,8 @@ export const Userlanding = () => {
      
       <div className="container-div">
         <div className="flex justify-end items-center">
-          <div className="flex flex-col font-text mr-4 justify-end items-end">
-            <div className="text-xl">player 1</div>
-            <div className="text-sm">player 1</div>
-          </div>
           
-          <Dropdown
-            information="D"
-            childInfo="Log Out"
-            onClick={handleLogoutClick}
-          />
-
+        
         </div>
         <div className="flex justify-center font-body text-4xl"></div>
       </div>

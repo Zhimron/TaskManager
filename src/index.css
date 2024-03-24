@@ -8,12 +8,12 @@
 
 @layer components{
   .navbar-icon {
-      @apply relative flex items-center justify-center text-ivory font-bold rounded-md
+      @apply relative flex items-center justify-center text-ivory font-bold rounded-md ml-5
        hover:text-ivory h-10 w-10 mt-2 mb-2 hover:bg-crimson  hover:rounded-2xl bg-royalblue
        transition-all duration-200 ease-linear cursor-pointer ;    
   }
   .navbar-tooltip{
-    @apply absolute mr-64 bg-royalblue h-10 w-36 pt-2 pl-5 rounded-md font-text
+    @apply absolute mr-56 bg-royalblue h-10 w-36 pt-2 pl-5 rounded-md font-text
      text-ivory font-bold transition-all duration-200 scale-0 origin-right;
   }
   .Home-navbar {

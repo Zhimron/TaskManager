@@ -8,11 +8,23 @@ import { FaHome, FaUserCog } from "react-icons/fa";
 import { IoMdAddCircle } from "react-icons/io";
 import { GrTasks } from "react-icons/gr";
 import { MdOutlineAddTask, MdGroupAdd } from "react-icons/md";
+import useLogout from "../../Hooks/useLogout";
+import Dropdown from "./Dropdown";
 
 const HomeNavbar = () => {
   const location = useLocation();
   const [changeCol, setChangeCol] = useState(location.pathname === "/Login");
   const [showList, setShowList] = useState(false);
+  const [showLogout,setShowLogout] = useState(false);
+
+   
+
+  const handleLogout = useLogout();
+
+  const handleLogoutClick = () => {
+    handleLogout("Logout");
+  };
+
  
   const handleClick = () =>{
    setShowList((prevState) => !prevState); 
@@ -30,6 +42,15 @@ const HomeNavbar = () => {
   const handleChangeBack = () => {
     setChangeCol(false);
   };
+const access_token = localStorage.getItem("access_token");
+   useEffect(() => { 
+     if (!access_token ) {
+       setShowLogout((false));
+     }else{
+      setShowLogout(true);
+     }
+     
+   }, [access_token]);
 
   return (
     <div className="shadow-md w-screen h-20 pb-5 pl-5 pt-5 flex justify-between bg-royalblue bg-opacity-50 absolute">
@@ -52,7 +73,7 @@ const HomeNavbar = () => {
           <HomeNavBarIcon text={"Login"} />
         </NavLink>
         {/* <div className="Home-navbar">hashash</div> */}
-        <motion.div onClick={handleClick} >
+        <motion.div onClick={handleClick}>
           <HomeNavBarIcon text={"Menu"} />
           {showList && (
             <motion.div
@@ -63,7 +84,7 @@ const HomeNavbar = () => {
                 hidden: { scale: 0 },
                 visible: { scale: 1 },
               }}
-              className="bg-red-5 flex flex-col items-end bg-serenity bg-opacity-50  rounded-lg "
+              className="bg-red-5 flex flex-col items-end p-5 bg-serenity rounded-2xl  bg-opacity-50  "
             >
               <NavBarIcon
                 icon={<FaHome size={30} />}
@@ -88,6 +109,13 @@ const HomeNavbar = () => {
             </motion.div>
           )}
         </motion.div>
+        {showLogout && (
+          <Dropdown
+            information="D"
+            childInfo="Log Out"
+            onClick={handleLogoutClick}
+          />
+        )}
       </div>
     </div>
   );

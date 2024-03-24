@@ -7,7 +7,7 @@ const PrivateRoutes = () => {
   // Check if token exists and is not expired (you might need additional logic for token expiration)
   const isAuthenticated = token !== null;
 
-  return isAuthenticated ? <Outlet /> : <Navigate to="/login" />;
+  return isAuthenticated ? <Outlet /> : <Navigate to="/Login" />;
 };
 
 export default PrivateRoutes;

@@ -5,7 +5,7 @@ class Dropdown extends Component {
     const { childInfo, information,onClick } = this.props;
 
     return (
-      <div className="dropdown dropdown-bottom dropdown-end dropdown-hover">
+      <div className="dropdown dropdown-bottom dropdown-end dropdown-hover flex  items-center">
         <div
           tabIndex={0}
           role="button"
