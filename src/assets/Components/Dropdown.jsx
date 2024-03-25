@@ -9,7 +9,7 @@ class Dropdown extends Component {
         <div
           tabIndex={0}
           role="button"
-          className="btn m-1 w-12 h-15 rounded-full font-body text-royalblue"
+          className="btn m-1 w-12 h-full rounded-xl font-body text-royalblue"
         >
           {information}
         </div>

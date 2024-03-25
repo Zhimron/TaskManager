@@ -14,7 +14,7 @@ function Modal({messageBool , Info}) {
         setMessage(false);
       }
     }, [messageBool]);
-  
+    
   return (
     <motion.div
       className=" flex absolute w-full  justify-center scale-0"
@@ -30,7 +30,7 @@ function Modal({messageBool , Info}) {
             <span className="ml-1 text-3xl">Success</span>
           </h3>
         ) : (
-          <h3 className="font-bold text-lg font-text flex items-center justify-center    ">
+          <h3 className="font-bold text-lg   font-text flex items-center justify-center    ">
             {" "}
             <BiSolidErrorAlt className="text-crimson text-3xl" />{" "}
             <span className="ml-1 text-3xl"> Failed </span>

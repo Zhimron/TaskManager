@@ -7,7 +7,7 @@ import AboutUs from './landing/AboutUs';
 import { UserHome } from './Userui/Components/UserHome';
 import { UserAddtask } from "./Userui/Components/UserAddtask";
 import PrivateRoutes from "./utils/PrivateRoutes";
-import { Userlanding } from './Userui/Userlanding';
+
 import HomeNavbar from './assets/Components/HomeNavbar';
 
 function App() {
@@ -22,7 +22,6 @@ function App() {
           <Route path="/Aboutus" element={<AboutUs />} />
           <Route element={<PrivateRoutes />}>
             <Route path="/Home" element={<UserHome />} />
-            <Route path="/Userform" element={<Userlanding />} />
             <Route
               path="/Addtask"
               element={<UserAddtask />}

@@ -17,7 +17,6 @@ const HomeNavbar = () => {
   const [showList, setShowList] = useState(false);
   const [showLogout,setShowLogout] = useState(false);
 
-   
 
   const handleLogout = useLogout();
 

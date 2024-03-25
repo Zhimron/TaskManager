@@ -85,7 +85,7 @@ import Modal from "../assets/Components/Modal";
         setIsLogin(true);
         setIsMessage(`Login Successfully: Welcome ${username}`);
         timerId = setTimeout(() => {
-          navigate("/Userform");
+          navigate("/Home");
         }, 3000);
       } else if (datalogin && datalogin.error === "Unauthorized") {
          setShowModal(true);
