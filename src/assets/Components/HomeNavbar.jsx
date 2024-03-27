@@ -11,6 +11,7 @@ import { MdOutlineAddTask, MdGroupAdd } from "react-icons/md";
 import useLogout from "../../Hooks/useLogout";
 import Dropdown from "./Dropdown";
 
+
 const HomeNavbar = () => {
   const location = useLocation();
   const [changeCol, setChangeCol] = useState(location.pathname === "/Login");
@@ -75,8 +76,8 @@ const access_token = localStorage.getItem("access_token");
         )}
         {/* <div className="Home-navbar">hashash</div> */}
         {showLogout && (
-          <motion.div onClick={handleClick}>
-            <HomeNavBarIcon text={"Menu"} />
+          <motion.div onClick={handleClick}>  
+            <HomeNavBarIcon text={"Menu"} />         
             {showList && (
               <motion.div
                 initial="hidden"
@@ -90,12 +91,12 @@ const access_token = localStorage.getItem("access_token");
               >
                 <NavBarIcon
                   icon={<FaHome size={30} />}
-                  text={"Home"}
+                  text={"DashBoard"}
                   to={"/Home"}
                 />
                 <NavBarIcon
                   icon={<IoMdAddCircle size={30} />}
-                  text={"Add Task"}
+                  text={"Task"}
                   to={"/Addtask"}
                 />
                 <NavBarIcon
@@ -116,11 +117,11 @@ const access_token = localStorage.getItem("access_token");
           </motion.div>
         )}
         {showLogout && (
-        <Dropdown
-          information="D"
-          childInfo="Log Out"
-          onClick={handleLogoutClick}
-        />
+          <Dropdown
+            information="D"
+            childInfo="Log Out"
+            onClick={handleLogoutClick}
+          />
         )}
       </div>
     </div>
