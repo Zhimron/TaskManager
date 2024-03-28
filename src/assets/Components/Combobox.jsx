@@ -15,7 +15,11 @@ export const Combobox = () => {
         value={selectedColor}
         onChange={handleChange}
       >
-        <option disabled value="" className="bg-slate-300 text-serenity">
+        <option
+         
+          value="Type of Task"
+          className="bg-slate-300 text-serenity"
+        >
           Type of Task
         </option>
         <option className="bg-ivory text-black" value="bg-green-400">
