@@ -1,10 +1,12 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Bowlby+One+SC&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Hammersmith+One&display=swap');
+/* @import 'react-big-calendar/lib/sass/styles';
+@import 'react-big-calendar/lib/addons/dragAndDrop/styles';  */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 
 @layer components{
   .navbar-icon {

@@ -58,7 +58,7 @@ const access_token = localStorage.getItem("access_token");
       initial={{ opacity : 0}}
       animate={{ opacity : 1 }}
       transition={{
-        duration: .1
+        duration: 2
       }}
     >
       <div

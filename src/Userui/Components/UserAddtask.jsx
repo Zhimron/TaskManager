@@ -22,19 +22,23 @@ export const UserAddtask = () => {
           className="w-3/12 flex items-center justify-start p-1 pl-16 font-body "
           whileTap={{ scale: 0.7 }}
           onClick={handleChange}
-          whileHover={{ scale: 0.9 }}
-          initial={{ y: -50 }}
-          animate={{ y: 0 }}
-          transition={{ duration: 1 }}
+           whileHover={{ scale: 0.9 }}
         >
-          <Link>Task</Link>{" "}
-          <IoMdAddCircle size={30} className="text-slate-800 ml-3" />
+          <motion.div
+            initial={{ y: -50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 2 }}
+            className="flex items-center"
+          >
+            <Link>Task</Link>{" "}
+            <IoMdAddCircle size={30} className="text-slate-800 ml-3" />
+          </motion.div>
         </motion.div>
         <motion.div
           className="ml-96 pl-10 flex items-center justify-end p-1 font-text "
-          initial={{ y: -50 }}
-          animate={{ y: 0 }}
-          transition={{ duration: 1 }}
+          initial={{ y: -50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 2 }}
         >
           <Link>About The Task</Link>{" "}
         </motion.div>
@@ -42,9 +46,7 @@ export const UserAddtask = () => {
 
       <div className=" w-full mt-5 burger flex ">
         {isShow ? (
-          <div
-            className="flex flex-col ml-10 rounded-3xl bg-ivory bg-opacity-25 py-12 items-center w-3/6 shadow-md h-[37em] "
-          >
+          <div className="flex flex-col ml-10 rounded-3xl bg-ivory bg-opacity-25 py-12 items-center w-3/6 shadow-md h-[37em] ">
             <div className="  w-full flex flex-col px-12 ">
               {/* <div className="font-text text-lg flex items-center justify-between mx-5 mt-3 ">
               <span className=" font-bold">Start Date:</span> <DatePicker />
