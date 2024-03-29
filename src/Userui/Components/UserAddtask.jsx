@@ -22,19 +22,29 @@ export const UserAddtask = () => {
           className="w-3/12 flex items-center justify-start p-1 pl-16 font-body "
           whileTap={{ scale: 0.7 }}
           onClick={handleChange}
-          whileHover={{ scale: 0.8 }}
+          whileHover={{ scale: 0.9 }}
+          initial={{ y: -50 }}
+          animate={{ y: 0 }}
+          transition={{ duration: 1 }}
         >
           <Link>Task</Link>{" "}
           <IoMdAddCircle size={30} className="text-slate-800 ml-3" />
         </motion.div>
-        <div className="ml-96 pl-10 flex items-center justify-end p-1 font-text ">
+        <motion.div
+          className="ml-96 pl-10 flex items-center justify-end p-1 font-text "
+          initial={{ y: -50 }}
+          animate={{ y: 0 }}
+          transition={{ duration: 1 }}
+        >
           <Link>About The Task</Link>{" "}
-        </div>
+        </motion.div>
       </div>
 
       <div className=" w-full mt-5 burger flex ">
         {isShow ? (
-          <div className="flex flex-col ml-10 rounded-3xl bg-ivory bg-opacity-25 py-12 items-center w-3/6 shadow-md h-[37em] ">
+          <div
+            className="flex flex-col ml-10 rounded-3xl bg-ivory bg-opacity-25 py-12 items-center w-3/6 shadow-md h-[37em] "
+          >
             <div className="  w-full flex flex-col px-12 ">
               {/* <div className="font-text text-lg flex items-center justify-between mx-5 mt-3 ">
               <span className=" font-bold">Start Date:</span> <DatePicker />
@@ -52,7 +62,12 @@ export const UserAddtask = () => {
             </div>
           </div>
         ) : (
-          <div className="flex flex-col ml-10 rounded-3xl bg-ivory bg-opacity-25 py-5 px-10 w-3/6 shadow-md h-[37em] overflow-auto">
+          <motion.div
+            className="flex flex-col ml-10 rounded-3xl bg-ivory bg-opacity-25 py-5 px-10 w-3/6 shadow-md h-[37em] overflow-auto"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+          >
             <div className="flex ">
               <div className="p-5 w-full">
                 <div className="font-body bg-slate-500 rounded-md pl-3 py-5 bg-opacity-50  ">
@@ -73,9 +88,14 @@ export const UserAddtask = () => {
                 ></progress>
               </div>
             </div>
-          </div>
+          </motion.div>
         )}
-        <div className="flex flex-col mx-10 rounded-3xl bg-ivory bg-opacity-50 py-5 px-10 w-3/6 shadow-md h-[37em]">
+        <motion.div
+          className="flex flex-col mx-10 rounded-3xl bg-ivory bg-opacity-50 py-5 px-10 w-3/6 shadow-md h-[37em]"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 2 }}
+        >
           <div className="flex">
             <div className="p-5 w-full">
               <div className="font-body bg-slate-500 rounded-md pl-3 py-5 bg-opacity-50  ">
@@ -94,7 +114,7 @@ export const UserAddtask = () => {
           <div className="p-5 w-full">
             <div className="font-text">Information</div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </div>
   );

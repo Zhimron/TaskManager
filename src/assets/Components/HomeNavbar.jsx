@@ -53,7 +53,14 @@ const access_token = localStorage.getItem("access_token");
    }, [access_token]);
 
   return (
-    <div className="shadow-md w-screen h-20 pb-5 pl-5 pt-5 flex justify-between bg-royalblue bg-opacity-50 absolute">
+    <motion.div
+      className="shadow-md w-screen h-20 pb-5 pl-5 pt-5 flex justify-between bg-royalblue bg-opacity-50 absolute"
+      initial={{ opacity : 0}}
+      animate={{ opacity : 1 }}
+      transition={{
+        duration: .1
+      }}
+    >
       <div
         className={`font-bold font-body md:text-3xl tracking-wider ${
           changeCol ? "text-white" : "text-royalblue"
@@ -76,8 +83,8 @@ const access_token = localStorage.getItem("access_token");
         )}
         {/* <div className="Home-navbar">hashash</div> */}
         {showLogout && (
-          <motion.div onClick={handleClick}>  
-            <HomeNavBarIcon text={"Menu"} />         
+          <motion.div onClick={handleClick}>
+            <HomeNavBarIcon text={"Menu"} />
             {showList && (
               <motion.div
                 initial="hidden"
@@ -124,7 +131,7 @@ const access_token = localStorage.getItem("access_token");
           />
         )}
       </div>
-    </div>
+    </motion.div>
   );
 };
 

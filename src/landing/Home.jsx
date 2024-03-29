@@ -4,7 +4,7 @@ import {motion} from "framer-motion"
 
 const Home = memo(() => {
   return (
-    <div className=" w-screen h-screen bg-gradient-to-t from-royalblue to-ivory flex flex-col items-center justify-center">
+    <div className=" w-screen h-screen bg-gradient-to-t from-royalblue to-ivory flex flex-col items-center justify-center" >
       {/* <HomeNavbar /> */}
       <div className="w-screen ">
         <div className=" items-center text-center w-screen ">
