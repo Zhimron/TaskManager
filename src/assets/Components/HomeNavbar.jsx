@@ -10,7 +10,8 @@ import { GrTasks } from "react-icons/gr";
 import { MdOutlineAddTask, MdGroupAdd } from "react-icons/md";
 import useLogout from "../../Hooks/useLogout";
 import Dropdown from "./Dropdown";
-
+import UseZustandLogin from "../../context/UseZustandLogin";
+import { jwtDecode } from "jwt-decode";
 
 const HomeNavbar = () => {
   const location = useLocation();
@@ -23,9 +24,11 @@ const HomeNavbar = () => {
 
   const handleLogoutClick = () => {
     handleLogout("Logout");
+
   };
 
- 
+  const { email, GetUser, isAuthenticated, toggleAuthToTrue } =
+    UseZustandLogin();
   const handleClick = () =>{
    setShowList((prevState) => !prevState); 
   }
@@ -42,23 +45,29 @@ const HomeNavbar = () => {
   const handleChangeBack = () => {
     setChangeCol(false);
   };
+
 const access_token = localStorage.getItem("access_token");
-   useEffect(() => { 
-     if (!access_token ) {
-       setShowLogout((false));
-     }else{
-      setShowLogout(true);
+// const decodedToken = jwt.decode(token);
+
+   useEffect(() => {
+     if (!access_token) {
+       setShowLogout(false);
+     } else {
+       setShowLogout(true);
+       const decodedToken = jwtDecode(access_token); // Decode JWT token
+       GetUser(decodedToken.name);
+       toggleAuthToTrue();
+       console.log(isAuthenticated);
      }
-     
-   }, [access_token]);
+   }, [access_token, toggleAuthToTrue]);
 
   return (
     <motion.div
       className="shadow-md w-screen h-20 pb-5 pl-5 pt-5 flex justify-between bg-royalblue bg-opacity-50 absolute"
-      initial={{ opacity : 0}}
-      animate={{ opacity : 1 }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
       transition={{
-        duration: 2
+        duration: 2,
       }}
     >
       <div
@@ -125,7 +134,7 @@ const access_token = localStorage.getItem("access_token");
         )}
         {showLogout && (
           <Dropdown
-            information="D"
+            information={`${email}`}
             childInfo="Log Out"
             onClick={handleLogoutClick}
           />

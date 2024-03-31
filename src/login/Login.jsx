@@ -9,6 +9,7 @@
 import { useNavigate } from "react-router-dom";
 import RedirectIfLoggedIn from "../utils/RedirectIfLoggedIn";
 import Modal from "../assets/Components/Modal";
+import UseZustandLogin from "../context/UseZustandLogin";
 
 
   const Login = memo(() => {
@@ -26,6 +27,8 @@ import Modal from "../assets/Components/Modal";
       url_reg,
       "POST"
     );
+    const { toggleAuthentication, toggleAuthToTrue, isAuthenticated , GetUser} =
+      UseZustandLogin();
 
     const handleSubmitLog = (e) => {
       e.preventDefault();
@@ -84,22 +87,29 @@ import Modal from "../assets/Components/Modal";
         setShowModal(true);
         setIsLogin(true);
         setIsMessage(`Login Successfully: Welcome ${username}`);
+
+
+        toggleAuthToTrue();
+
+        // GetUser(username);
+
+        console.log(isAuthenticated);
         timerId = setTimeout(() => {
           navigate("/Home");
         }, 3000);
       } else if (datalogin && datalogin.error === "Unauthorized") {
-         setShowModal(true);
+        setShowModal(true);
         setIsLogin(false);
         setIsMessage("Login Failed: Check Your Username or Password");
-        timerId = setTimeout(()=>{
+        timerId = setTimeout(() => {
           setShowModal(false);
-        },1500)
+        }, 1500);
       }
 
       return () => {
         clearTimeout(timerId);
       };
-    }, [datalogin]); // Update the dependency here to datalogin
+    }, [datalogin, toggleAuthToTrue, isAuthenticated, GetUser]);
 
     return (
       <div className="w-screen h-screen bg-royalblue flex justify-center items-center">

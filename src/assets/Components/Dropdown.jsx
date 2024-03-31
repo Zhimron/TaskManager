@@ -5,12 +5,13 @@ class Dropdown extends Component {
     const { childInfo, information,onClick } = this.props;
 
     return (
-      <div className="dropdown dropdown-bottom dropdown-end dropdown-hover flex  items-center">
+      <div className="dropdown dropdown-bottom dropdown-end dropdown-hover flex  items-center ">
         <div
           tabIndex={0}
           role="button"
-          className="btn m-1 w-12 h-full rounded-xl font-body text-royalblue"
+          className="btn m-1 w-32 h-full rounded-xl font-text text-royalblue"
         >
+          <a className="text-green-700">User:</a>
           {information}
         </div>
         <ul

@@ -1,8 +1,10 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import UseZustandLogin from "../context/UseZustandLogin";
 
 const useLogout = (children) => {
   const navigate = useNavigate();
+  const { toggleAuthentication } = UseZustandLogin();
 
   const handleLogout = async () => {
     try {
@@ -26,6 +28,7 @@ const useLogout = (children) => {
        
       // Assuming successful logout, clear token and navigate to login page
       localStorage.removeItem("access_token");
+      toggleAuthentication();
       navigate("/Login");
     } catch (error) {
       console.error("Logout failed:", error);
