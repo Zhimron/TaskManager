@@ -8,13 +8,17 @@ import { ButtonComp } from '../../assets/Components/ButtonComp';
 import { IoMdAddCircle } from "react-icons/io";
 import { Link } from "react-router-dom";
 import { motion } from 'framer-motion';
+import { useCustomFetch } from '../../Hooks/useCustomFetch';
 
 export const UserAddtask = () => {
   const [isShow,SetIsShow] = useState(false);
+
   const handleChange = () =>{
     SetIsShow((prevState) => !prevState);
-   
   }
+   const url_reg = "http://127.0.0.1:8000/api/gettask";
+   const { data } = useCustomFetch(url_reg);
+
   return (
     <div className="w-screen h-screen bg-gradient-to-t from-royalblue to-ivory ">
       <div className="  text-4xl flex items-center text-green-700  mx-5  pt-32 ml-10">
@@ -22,7 +26,7 @@ export const UserAddtask = () => {
           className="w-3/12 flex items-center justify-start p-1 pl-16 font-body "
           whileTap={{ scale: 0.7 }}
           onClick={handleChange}
-           whileHover={{ scale: 0.9 }}
+          whileHover={{ scale: 0.9 }}
         >
           <motion.div
             initial={{ y: -50, opacity: 0 }}
@@ -70,26 +74,36 @@ export const UserAddtask = () => {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
           >
-            <div className="flex ">
-              <div className="p-5 w-full">
-                <div className="font-body bg-slate-500 rounded-md pl-3 py-5 bg-opacity-50  ">
-                  Project Title
+            {data &&
+              data.map((field, index) => (
+                <div className="flex font-text font-bold">
+                  <div className="p-5 w-full" key={index}>
+                    <div className=" text-lg text-crimson bg-slate-500 rounded-md pl-3 py-5 bg-opacity-50 tracking-wider ">
+                      {field.project_name}
+                    </div>
+                    <div className=" pl-3 mt-2 text-blue-400">
+                      <a className="text-green-800">Type:</a>{" "}
+                      {field.task_category}
+                    </div>
+                    <div className=" pl-3 mt-2">
+                      <a className="text-green-800">Deadline:</a>{" "}
+                      {field.deadline}
+                    </div>
+                  </div>
+
+                  <div className="divider divider-horizontal font-text pl-10">
+                    Team
+                  </div>
+                  <div className="p-5 w-full">
+                    <div className="font-body">Team Assigned..</div>
+                    <progress
+                      className="progress progress-success w-56 mt-5"
+                      value="65"
+                      max="100"
+                    ></progress>
+                  </div>
                 </div>
-                <div className="font-body pl-3 mt-2">Priority</div>
-                <div className="font-body pl-3 mt-2">Deadline</div>
-              </div>
-              <div className="divider divider-horizontal font-text pl-10">
-                Team{" "}
-              </div>
-              <div className="p-5 w-full">
-                <div className="font-body">Team Assigned..</div>
-                <progress
-                  className="progress progress-success w-56 mt-5"
-                  value="65"
-                  max="100"
-                ></progress>
-              </div>
-            </div>
+              ))}
           </motion.div>
         )}
         <motion.div

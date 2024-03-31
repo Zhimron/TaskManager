@@ -56,7 +56,7 @@ const access_token = localStorage.getItem("access_token");
        setShowLogout(true);
        const decodedToken = jwtDecode(access_token); // Decode JWT token
        GetUser(decodedToken.name);
-       toggleAuthToTrue();
+       toggleAuthToTrue ();
        console.log(isAuthenticated);
      }
    }, [access_token, toggleAuthToTrue]);
