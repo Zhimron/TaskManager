@@ -36,7 +36,7 @@ export const UserAddtask = () => {
      return;
  
    }
-
+   
      taskMutate({
       project_name: projectName,
       task_description:description,
@@ -45,7 +45,19 @@ export const UserAddtask = () => {
      });
 
    };
-  
+   const url_GetTaskbyID = "http://127.0.0.1:8000/api/gettaskID";
+
+   const { data: datataskID, mutate: taskIDMutate } = useCustomMutation(
+     url_GetTaskbyID,
+     "POST"
+   );
+
+  const handleShowId = (e) => {
+    taskIDMutate({
+      id:e
+    });
+    
+  }
 
   return (
     <div className="w-screen h-screen bg-gradient-to-t from-royalblue to-ivory ">
@@ -128,10 +140,13 @@ export const UserAddtask = () => {
                 <motion.div
                   className="flex font-text font-bold"
                   whileHover={{ scale: 0.9 }}
-                  whileInView={{ opacity: 1, duration:10 }}
+                  whileInView={{ opacity: 1 }}
                   initial={{ scale: 1, opacity: 0 }}
+                  //onClick={(e) => setId(e.target.value)}
+                  key={index}
+                  onClick={() => handleShowId(field.id)}
                 >
-                  <div className="p-5 w-full" key={index}>
+                  <div className="p-5 w-full">
                     <div className=" text-lg text-crimson bg-slate-500 rounded-md pl-3 py-5 bg-opacity-50 tracking-wider ">
                       {field.project_name}
                     </div>
@@ -166,24 +181,31 @@ export const UserAddtask = () => {
           animate={{ opacity: 1 }}
           transition={{ duration: 2 }}
         >
-          <div className="flex">
-            <div className="p-5 w-full">
-              <div className="font-body bg-slate-500 rounded-md pl-3 py-5 bg-opacity-50  ">
-                Project Title
+          {/* {Array.isArray(datataskID) &&
+            datataskID.map((datas, index) => ( */}
+
+          {datataskID ? (
+            <div className="flex">
+              <div className="p-5 w-full">
+                <div className="font-text font-bold text-2xl bg-slate-500 rounded-md pl-3 py-5 bg-opacity-50 flex justify-center  ">
+                  {datataskID.project_name}
+                </div>
+                <div className="font-body pl-3 mt-2">
+                  {datataskID.task_category}
+                </div>
+                <div className="font-body pl-3 mt-2">{datataskID.deadline}</div>
+                <div className="p-5 w-full">
+                  <div className="font-text">{datataskID.task_description}</div>
+                </div>
               </div>
-              <div className="font-body pl-3 mt-2">Priority</div>
-              <div className="font-body pl-3 mt-2">Deadline</div>
             </div>
-            <div className="divider divider-horizontal font-text pl-10">
-              Team{" "}
+          ) : (
+            <div className="flex flex-col justify-center items-center h-full font-body">
+              Loading...
             </div>
-            <div className="p-5 w-full">
-              <div className="font-body">Team Assigned..</div>
-            </div>
-          </div>
-          <div className="p-5 w-full">
-            <div className="font-text">Information</div>
-          </div>
+          )}
+
+          {/* ))} */}
         </motion.div>
       </div>
     </div>
