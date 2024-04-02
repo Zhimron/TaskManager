@@ -9,6 +9,7 @@ import { IoMdAddCircle } from "react-icons/io";
 import { Link } from "react-router-dom";
 import { motion } from 'framer-motion';
 import { useCustomFetch } from '../../Hooks/useCustomFetch';
+import { useCustomMutation } from '../../Hooks/useCustomMutation';
 
 export const UserAddtask = () => {
   const [isShow,SetIsShow] = useState(false);
@@ -16,8 +17,35 @@ export const UserAddtask = () => {
   const handleChange = () =>{
     SetIsShow((prevState) => !prevState);
   }
-   const url_reg = "http://127.0.0.1:8000/api/gettask";
-   const { data } = useCustomFetch(url_reg);
+   const url_getTask = "http://127.0.0.1:8000/api/gettask";
+   const { data } = useCustomFetch(url_getTask);
+  const [deadline, SetDeadline] = useState("");
+   const [projectName,SetProjectName] = useState("");
+   const [description, SetDescription] = useState('');
+   const [typeOfTask, SetTypeOfTask] = useState("");
+   const [error, setError] = useState("");
+
+   const url_addTask = "http://127.0.0.1:8000/api/addtask";
+   const { data: dataMutation , mutate: taskMutate } = useCustomMutation(url_addTask,"POST");
+
+   const handleSubmitTask =(e)=>{
+   e.preventDefault();
+   if (!projectName || !deadline || !description || !typeOfTask) {
+     setError("Complete All fields");
+     console.log(error);
+     return;
+ 
+   }
+
+     taskMutate({
+      project_name: projectName,
+      task_description:description,
+      task_category:typeOfTask,
+      deadline:deadline
+     });
+
+   };
+  
 
   return (
     <div className="w-screen h-screen bg-gradient-to-t from-royalblue to-ivory ">
@@ -26,12 +54,12 @@ export const UserAddtask = () => {
           className="w-3/12 flex items-center justify-start p-1 pl-16 font-body "
           whileTap={{ scale: 0.7 }}
           onClick={handleChange}
-          whileHover={{ scale: 0.9 }}
+          whileHover={{ scale: 1 }}
         >
           <motion.div
             initial={{ y: -50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 2 }}
+            transition={{ duration: 1 }}
             className="flex items-center"
           >
             <Link>Task</Link>{" "}
@@ -50,23 +78,44 @@ export const UserAddtask = () => {
 
       <div className=" w-full mt-5 burger flex ">
         {isShow ? (
-          <div className="flex flex-col ml-10 rounded-3xl bg-ivory bg-opacity-25 py-12 items-center w-3/6 shadow-md h-[37em] ">
+          <form
+            onSubmit={handleSubmitTask}
+            className="flex flex-col ml-10 rounded-3xl bg-ivory bg-opacity-25 py-12 items-center w-3/6 shadow-md h-[37em] "
+          >
             <div className="  w-full flex flex-col px-12 ">
               {/* <div className="font-text text-lg flex items-center justify-between mx-5 mt-3 ">
               <span className=" font-bold">Start Date:</span> <DatePicker />
             </div> */}
+
               <div className=" font-text  text-lg flex  items-center justify-between mx-5 mt-2 ">
-                <span className="font-bold">Deadline:</span> <DatePicker />
+                <span className="font-bold">Deadline:</span>{" "}
+                <DatePicker
+                  value={deadline}
+                  onChange={(e) => SetDeadline(e.target.value)}
+                />
               </div>
             </div>
 
             <div className="w-full flex flex-col font-body items-center   ">
-              <InputDefault type="text" placeholder="Project Name" />
-              <TextArea />
-              <Combobox />
+              <InputDefault
+                type="text"
+                placeholder="Project Name"
+                value={projectName}
+                onChange={(e) => SetProjectName(e.target.value)}
+              />
+              <TextArea
+                placeholder="Description of Task"
+                value={description}
+                onChange={(e) => SetDescription(e.target.value)}
+              />
+              <Combobox
+                value={typeOfTask}
+                onChange={(e) => SetTypeOfTask(e.target.value)}
+              />
+
               <ButtonComp children={"Add Task"} />
             </div>
-          </div>
+          </form>
         ) : (
           <motion.div
             className="flex flex-col ml-10 rounded-3xl bg-ivory bg-opacity-25 py-5 px-10 w-3/6 shadow-md h-[37em] overflow-auto"
@@ -76,7 +125,12 @@ export const UserAddtask = () => {
           >
             {data &&
               data.map((field, index) => (
-                <div className="flex font-text font-bold">
+                <motion.div
+                  className="flex font-text font-bold"
+                  whileHover={{ scale: 0.9 }}
+                  whileInView={{ opacity: 1, duration:10 }}
+                  initial={{ scale: 1, opacity: 0 }}
+                >
                   <div className="p-5 w-full" key={index}>
                     <div className=" text-lg text-crimson bg-slate-500 rounded-md pl-3 py-5 bg-opacity-50 tracking-wider ">
                       {field.project_name}
@@ -102,7 +156,7 @@ export const UserAddtask = () => {
                       max="100"
                     ></progress>
                   </div>
-                </div>
+                </motion.div>
               ))}
           </motion.div>
         )}

@@ -40,6 +40,7 @@ import UseZustandLogin from "../context/UseZustandLogin";
         name: username,
         password: password,
       });
+      
     };
     const [regUsername, setregUsername] = useState("");
     const [regPassword, setregPassword] = useState("");
