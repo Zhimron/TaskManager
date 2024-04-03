@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import { DatePicker } from '../../assets/Components/DatePicker';
 import InputDefault from '../../assets/Components/InputDefault';
 import { TextArea } from '../../assets/Components/TextArea';
@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import { motion } from 'framer-motion';
 import { useCustomFetch } from '../../Hooks/useCustomFetch';
 import { useCustomMutation } from '../../Hooks/useCustomMutation';
+import Modal from '../../assets/Components/Modal';
 
 export const UserAddtask = () => {
   const [isShow,SetIsShow] = useState(false);
@@ -45,6 +46,27 @@ export const UserAddtask = () => {
      });
 
    };
+   const [showModal,SetShowModal] = useState(false);
+   const [Message, SetMessage] = useState("");
+   const [info, SetInfo] = useState("");
+
+    useEffect(() => {
+      if(dataMutation ){
+        if (dataMutation.Status != "Task Not Added") {
+          SetShowModal(true);
+          SetMessage("Task not added");
+          SetInfo("");
+        } else {
+          SetShowModal(true);
+          SetMessage("Task added");
+          SetInfo("projectName");
+        }
+      }else{
+        SetShowModal(false);
+      }
+    }, [dataMutation]);
+
+
    const url_GetTaskbyID = "http://127.0.0.1:8000/api/gettaskID";
 
    const { data: datataskID, mutate: taskIDMutate } = useCustomMutation(
@@ -87,8 +109,8 @@ export const UserAddtask = () => {
           <Link>About The Task</Link>{" "}
         </motion.div>
       </div>
-
       <div className=" w-full mt-5 burger flex ">
+        {showModal && <Modal messageBool={Message} Info={info} />}
         {isShow ? (
           <form
             onSubmit={handleSubmitTask}
@@ -147,7 +169,7 @@ export const UserAddtask = () => {
                   onClick={() => handleShowId(field.id)}
                 >
                   <div className="p-5 w-full">
-                    <div className=" text-lg text-crimson bg-slate-500 rounded-md pl-3 py-5 bg-opacity-50 tracking-wider ">
+                    <div className=" text-lg text-crimson uppercase bg-slate-500 rounded-md pl-3 py-5 bg-opacity-50 tracking-wider ">
                       {field.project_name}
                     </div>
                     <div className=" pl-3 mt-2 text-blue-400">
@@ -186,22 +208,26 @@ export const UserAddtask = () => {
 
           {datataskID ? (
             <div className="flex">
-              <div className="p-5 w-full">
-                <div className="font-text font-bold text-2xl bg-slate-500 rounded-md pl-3 py-5 bg-opacity-50 flex justify-center  ">
+              <div className="p-5 w-full h-full">
+                <div className="font-text font-bold text-3xl bg-slate-500 text-white uppercase rounded-md pl-3 py-5 bg-opacity-50 flex justify-center  ">
                   {datataskID.project_name}
                 </div>
-                <div className="font-body pl-3 mt-2">
-                  {datataskID.task_category}
+                <div className="pl-3  flex mt-5 ">
+                  <p className="font-body text-green-800">Type:</p>{" "}
+                  <p className="font-text">{datataskID.task_category} </p>
                 </div>
-                <div className="font-body pl-3 mt-2">{datataskID.deadline}</div>
-                <div className="p-5 w-full">
-                  <div className="font-text">{datataskID.task_description}</div>
+                <div className=" pl-3 mt-5 flex">
+                  <p className="font-body text-green-800">Deadline:</p>
+                  <p className="font-text">{datataskID.deadline}</p>
+                </div>
+                <div className="p-5  tracking-wider  mt-5 rounded-lg font-text text-justify text-wrap break-all border-2 border-indigo-950">
+                  {datataskID.task_description}
                 </div>
               </div>
             </div>
           ) : (
             <div className="flex flex-col justify-center items-center h-full font-body">
-              Loading...
+              <span className="loading loading-dots loading-lg"></span>
             </div>
           )}
 

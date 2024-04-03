@@ -17,7 +17,7 @@ function Modal({messageBool , Info}) {
     
   return (
     <motion.div
-      className=" flex absolute w-full  justify-center scale-0"
+      className=" flex absolute w-full  justify-center scale-0 z-20"
       initial={{ opacity: 0, scale: 0.5 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.4 }}
