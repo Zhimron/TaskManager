@@ -173,7 +173,7 @@ import UseZustandLogin from "../context/UseZustandLogin";
         )}
         {signUp && (
           <motion.div
-            className="flex justify-center bg-ivory bg-opacity-25 w-2/6 h-5/6 rounded-md"
+            className="flex justify-center bg-ivory bg-opacity-25 w-2/6 h-4/5 rounded-md mt-8"
             initial={{ scale: 0.3 }}
             animate={{ scale: 1 }}
             transition={{
@@ -186,7 +186,7 @@ import UseZustandLogin from "../context/UseZustandLogin";
           >
             {/* <form onSubmit={handleFormSubmit}> */}
 
-            <div className="flex flex-col mt-16 items-center w-2/3 h-2/3">
+            <div className="flex flex-col mt-14 items-center w-2/3 h-2/3 ">
               <img
                 src="/src/assets/pictures/walrus.png"
                 className="w-1/4 h-1/4 mb-5"

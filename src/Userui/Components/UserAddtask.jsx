@@ -19,7 +19,7 @@ export const UserAddtask = () => {
     SetIsShow((prevState) => !prevState);
   }
    const url_getTask = "http://127.0.0.1:8000/api/gettask";
-   const { data } = useCustomFetch(url_getTask);
+   const { data , fetchData} = useCustomFetch(url_getTask);
   const [deadline, SetDeadline] = useState("");
    const [projectName,SetProjectName] = useState("");
    const [description, SetDescription] = useState('');
@@ -37,7 +37,7 @@ export const UserAddtask = () => {
      return;
  
    }
-   
+
      taskMutate({
       project_name: projectName,
       task_description:description,
@@ -51,18 +51,25 @@ export const UserAddtask = () => {
    const [info, SetInfo] = useState("");
 
     useEffect(() => {
-      if(dataMutation ){
+      let timerId;
+      if (dataMutation) {
         if (dataMutation.Status != "Task Not Added") {
-          SetShowModal(true);
+            SetShowModal(true);      
           SetMessage("Task not added");
           SetInfo("");
         } else {
-          SetShowModal(true);
-          SetMessage("Task added");
+           SetShowModal(true);
+            SetMessage("Task added");
           SetInfo("projectName");
         }
-      }else{
+      } else {
         SetShowModal(false);
+      }
+      timerId = setTimeout(() => {
+        SetShowModal(false);
+      }, 1000);
+      return ()=> {
+        clearTimeout(timerId);
       }
     }, [dataMutation]);
 
@@ -93,7 +100,7 @@ export const UserAddtask = () => {
           <motion.div
             initial={{ y: -50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 1 }}
+            transition={{ duration: 1, y: { type: "spring" } }}
             className="flex items-center"
           >
             <Link>Task</Link>{" "}
@@ -104,7 +111,7 @@ export const UserAddtask = () => {
           className="ml-96 pl-10 flex items-center justify-end p-1 font-text "
           initial={{ y: -50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 2 }}
+          transition={{ duration: 2, y: { type: "spring" } }}
         >
           <Link>About The Task</Link>{" "}
         </motion.div>
@@ -152,7 +159,7 @@ export const UserAddtask = () => {
           </form>
         ) : (
           <motion.div
-            className="flex flex-col ml-10 rounded-3xl bg-ivory bg-opacity-25 py-5 px-10 w-3/6 shadow-md h-[37em] overflow-auto"
+            className="flex flex-col ml-10 rounded-3xl bg-ivory bg-opacity-25 py-5 px-10 w-3/6 shadow-md h-[37em] overflow-auto scroll-smooth snap-y"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
@@ -160,7 +167,7 @@ export const UserAddtask = () => {
             {data &&
               data.map((field, index) => (
                 <motion.div
-                  className="flex font-text font-bold"
+                  className="flex font-text font-bold snap-center"
                   whileHover={{ scale: 0.9 }}
                   whileInView={{ opacity: 1 }}
                   initial={{ scale: 1, opacity: 0 }}
@@ -186,12 +193,8 @@ export const UserAddtask = () => {
                     Team
                   </div>
                   <div className="p-5 w-full">
-                    <div className="font-body">Team Assigned..</div>
-                    <progress
-                      className="progress progress-success w-56 mt-5"
-                      value="65"
-                      max="100"
-                    ></progress>
+                    <div className="font-text">Team Assigned...</div>
+                    
                   </div>
                 </motion.div>
               ))}
