@@ -9,6 +9,7 @@ import { UserAddtask } from "./Userui/Components/UserAddtask";
 import PrivateRoutes from "./utils/PrivateRoutes";
 
 import HomeNavbar from './assets/Components/HomeNavbar';
+import { UserAssignTask } from './Userui/Components/UserAssignTask';
 
 function App() {
 
@@ -16,16 +17,14 @@ function App() {
     <>
       <BrowserRouter>
         {/* <Navbar /> */}
-        <HomeNavbar/>
+        <HomeNavbar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/Aboutus" element={<AboutUs />} />
           <Route element={<PrivateRoutes />}>
             <Route path="/Home" element={<UserHome />} />
-            <Route
-              path="/Addtask"
-              element={<UserAddtask />}
-            />
+            <Route path="/Addtask" element={<UserAddtask />} />
+            <Route path="/AssignTask" element={<UserAssignTask />} />
           </Route>
           <Route path="/Login" element={<Login />} />
         </Routes>

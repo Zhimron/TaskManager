@@ -73,7 +73,7 @@ const access_token = localStorage.getItem("access_token");
       <div
         className={`font-bold font-body md:text-3xl tracking-wider ${
           changeCol ? "text-white" : "text-royalblue"
-        } md:ml-28`}
+        } md:ml-5`}
       >
         Tusk Manager
       </div>
@@ -118,6 +118,7 @@ const access_token = localStorage.getItem("access_token");
                 <NavBarIcon
                   icon={<MdOutlineAddTask size={30} />}
                   text={"Assign Task"}
+                  to={"/AssignTask"}
                 />
                 <NavBarIcon icon={<GrTasks size={30} />} text={"Progress"} />
                 <NavBarIcon

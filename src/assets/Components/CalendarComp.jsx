@@ -20,19 +20,18 @@ const localizer = dateFnsLocalizer({
   locales,
 })
 
-export const CalendarComp = (myEventsList) => (
+export const CalendarComp = ({events}) => (
   <motion.div
     initial={{ y: -50, opacity: 0 }}
     animate={{ y: 0, opacity: 1 }}
-    transition={{ duration: .6 ,y :{type:"spring"} }}
+    transition={{ duration: 0.6,  y: { type: "spring" } }}
   >
     <Calendar
       localizer={localizer}
-      // events={myEventsList}
+      events={events}
       startAccessor="start"
       endAccessor="end"
       className="h-[35em]  w-[60em] rounded-lg font-text"
-      
     />
   </motion.div>
 );

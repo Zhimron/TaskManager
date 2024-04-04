@@ -11,16 +11,23 @@ import { motion } from 'framer-motion';
 import { useCustomFetch } from '../../Hooks/useCustomFetch';
 import { useCustomMutation } from '../../Hooks/useCustomMutation';
 import Modal from '../../assets/Components/Modal';
+import { TimePicker } from '../../assets/Components/TimePicker';
 
 export const UserAddtask = () => {
   const [isShow,SetIsShow] = useState(false);
 
   const handleChange = () =>{
     SetIsShow((prevState) => !prevState);
+    
   }
+  
    const url_getTask = "http://127.0.0.1:8000/api/gettask";
-   const { data , fetchData} = useCustomFetch(url_getTask);
-  const [deadline, SetDeadline] = useState("");
+       const { data } = useCustomFetch(url_getTask);
+  
+  
+   
+  const [deadline, SetDeadline] = useState('');
+  const [time, SetTime] = useState("");
    const [projectName,SetProjectName] = useState("");
    const [description, SetDescription] = useState('');
    const [typeOfTask, SetTypeOfTask] = useState("");
@@ -34,15 +41,15 @@ export const UserAddtask = () => {
    if (!projectName || !deadline || !description || !typeOfTask) {
      setError("Complete All fields");
      console.log(error);
+     console.log("asdas");
      return;
- 
    }
-
+    
      taskMutate({
       project_name: projectName,
       task_description:description,
       task_category:typeOfTask,
-      deadline:deadline
+      deadline:deadline+' '+time+':00'
      });
 
    };
@@ -62,9 +69,7 @@ export const UserAddtask = () => {
             SetMessage("Task added");
           SetInfo("projectName");
         }
-      } else {
-        SetShowModal(false);
-      }
+      } 
       timerId = setTimeout(() => {
         SetShowModal(false);
       }, 1000);
@@ -92,7 +97,7 @@ export const UserAddtask = () => {
     <div className="w-screen h-screen bg-gradient-to-t from-royalblue to-ivory ">
       <div className="  text-4xl flex items-center text-green-700  mx-5  pt-32 ml-10">
         <motion.div
-          className="w-3/12 flex items-center justify-start p-1 pl-16 font-body "
+          className="w-3/12 flex items-center justify-start p-1  font-body "
           whileTap={{ scale: 0.7 }}
           onClick={handleChange}
           whileHover={{ scale: 1 }}
@@ -130,10 +135,16 @@ export const UserAddtask = () => {
 
               <div className=" font-text  text-lg flex  items-center justify-between mx-5 mt-2 ">
                 <span className="font-bold">Deadline:</span>{" "}
-                <DatePicker
-                  value={deadline}
-                  onChange={(e) => SetDeadline(e.target.value)}
-                />
+                <div className='flex'>
+                  <DatePicker
+                    value={deadline}
+                    onChange={(e) => SetDeadline(e.target.value)}
+                  />
+                  <TimePicker
+                    value={time}
+                    onChange={(e) => SetTime(e.target.value)}
+                  />
+                </div>
               </div>
             </div>
 
@@ -164,7 +175,8 @@ export const UserAddtask = () => {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
           >
-            {data &&
+            {data ? (
+              data &&
               data.map((field, index) => (
                 <motion.div
                   className="flex font-text font-bold snap-center"
@@ -194,10 +206,14 @@ export const UserAddtask = () => {
                   </div>
                   <div className="p-5 w-full">
                     <div className="font-text">Team Assigned...</div>
-                    
                   </div>
                 </motion.div>
-              ))}
+              ))
+            ) : (
+              <div className="flex flex-col justify-center items-center h-full font-body">
+                <span className="loading loading-dots loading-lg"></span>
+              </div>
+            )}
           </motion.div>
         )}
         <motion.div
