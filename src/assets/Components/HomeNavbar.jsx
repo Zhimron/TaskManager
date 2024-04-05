@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import HomeNavBarIcon from "./HomeNavbarIcon";
 import { motion } from "framer-motion";
 import { MdScale } from "react-icons/md";
@@ -12,6 +12,7 @@ import useLogout from "../../Hooks/useLogout";
 import Dropdown from "./Dropdown";
 import UseZustandLogin from "../../context/UseZustandLogin";
 import { jwtDecode } from "jwt-decode";
+
 
 const HomeNavbar = () => {
   const location = useLocation();
@@ -46,20 +47,37 @@ const HomeNavbar = () => {
     setChangeCol(false);
   };
 
-const access_token = localStorage.getItem("access_token");
-// const decodedToken = jwt.decode(token);
+  const access_token = localStorage.getItem("access_token");
+  // const navigate = useNavigate();
 
    useEffect(() => {
+    
+
      if (!access_token) {
        setShowLogout(false);
      } else {
+      const decodedToken = jwtDecode(access_token);
+
+      const timestamp = decodedToken.exp;
+      const milliseconds = timestamp * 1000;
+
+      const dateObject = new Date(milliseconds).toLocaleString("en-US", {
+        timeZone: "Asia/Manila",
+      });
+      const currentDateObject = new Date().toLocaleString("en-US", {
+        timeZone: "Asia/Manila",
+      });
+      
+      if (currentDateObject > dateObject) {
+         localStorage.removeItem("access_token");
+      }
        setShowLogout(true);
-       const decodedToken = jwtDecode(access_token); // Decode JWT token
+       // Decode JWT token
        GetUser(decodedToken.name);
-       toggleAuthToTrue ();
+       toggleAuthToTrue();
        console.log(isAuthenticated);
      }
-   }, [access_token, toggleAuthToTrue]);
+   }, [access_token, toggleAuthToTrue,]);
 
   return (
     <motion.div
