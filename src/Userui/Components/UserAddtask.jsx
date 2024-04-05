@@ -11,7 +11,7 @@ import { motion } from 'framer-motion';
 import { useCustomFetch } from '../../Hooks/useCustomFetch';
 import { useCustomMutation } from '../../Hooks/useCustomMutation';
 import Modal from '../../assets/Components/Modal';
-import { TimePicker } from '../../assets/Components/TimePicker';
+
 
 export const UserAddtask = () => {
   const [isShow,SetIsShow] = useState(false);
@@ -49,7 +49,7 @@ export const UserAddtask = () => {
       project_name: projectName,
       task_description:description,
       task_category:typeOfTask,
-      deadline:deadline+' '+time+':00'
+      deadline:deadline
      });
 
    };
@@ -140,10 +140,7 @@ export const UserAddtask = () => {
                     value={deadline}
                     onChange={(e) => SetDeadline(e.target.value)}
                   />
-                  <TimePicker
-                    value={time}
-                    onChange={(e) => SetTime(e.target.value)}
-                  />
+                  
                 </div>
               </div>
             </div>

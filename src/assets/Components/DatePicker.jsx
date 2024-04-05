@@ -6,7 +6,7 @@ export const DatePicker = ({value,onChange}) => {
     <div>
       <input
         className="w-full h-10 p-5 rounded-lg font-text "
-        type='date'
+        type='datetime-local'
         value={value}
         onChange={onChange}
       ></input>
