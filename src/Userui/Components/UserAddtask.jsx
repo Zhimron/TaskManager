@@ -8,9 +8,10 @@ import { ButtonComp } from '../../assets/Components/ButtonComp';
 import { IoMdAddCircle } from "react-icons/io";
 import { Link } from "react-router-dom";
 import { motion } from 'framer-motion';
-import { useCustomFetch } from '../../Hooks/useCustomFetch';
+
 import { useCustomMutation } from '../../Hooks/useCustomMutation';
 import Modal from '../../assets/Components/Modal';
+import UseZustandGetId from '../../context/UseZustandGetId';
 
 
 export const UserAddtask = () => {
@@ -21,13 +22,28 @@ export const UserAddtask = () => {
     
   }
   
-   const url_getTask = "http://127.0.0.1:8000/api/gettask";
-       const { data } = useCustomFetch(url_getTask);
+  
+  const {userid} = UseZustandGetId();
+
+  const url_getTask = "http://127.0.0.1:8000/api/gettask";
+  //post nalang
+  const { data: dataFetch, mutate: mutateData } = useCustomMutation(
+    url_getTask,
+    "POST"
+  );
+
+  useEffect(() => {
+    mutateData({
+      user_id: userid,
+    });
+  }, []);
   
   
-   
-  const [deadline, SetDeadline] = useState('');
-  const [time, SetTime] = useState("");
+  
+ 
+  
+   const [deadline, SetDeadline] = useState('');
+  //  const [time, SetTime] = useState("");
    const [projectName,SetProjectName] = useState("");
    const [description, SetDescription] = useState('');
    const [typeOfTask, SetTypeOfTask] = useState("");
@@ -41,15 +57,15 @@ export const UserAddtask = () => {
    if (!projectName || !deadline || !description || !typeOfTask) {
      setError("Complete All fields");
      console.log(error);
-     console.log("asdas");
      return;
    }
     
      taskMutate({
-      project_name: projectName,
-      task_description:description,
-      task_category:typeOfTask,
-      deadline:deadline
+       user_id: userid,
+       project_name: projectName,
+       task_description: description,
+       task_category: typeOfTask,
+       deadline: deadline,
      });
 
    };
@@ -61,29 +77,35 @@ export const UserAddtask = () => {
       let timerId;
       if (dataMutation) {
         if (dataMutation.Status != "Task Not Added") {
-            SetShowModal(true);      
+
+          SetShowModal(true);      
           SetMessage("Task not added");
           SetInfo("");
+
         } else {
-           SetShowModal(true);
-            SetMessage("Task added");
+
+          SetShowModal(true);
+          SetMessage("Task added");
           SetInfo("projectName");
+
         }
       } 
+
       timerId = setTimeout(() => {
         SetShowModal(false);
       }, 1000);
       return ()=> {
         clearTimeout(timerId);
       }
+
     }, [dataMutation]);
 
 
    const url_GetTaskbyID = "http://127.0.0.1:8000/api/gettaskID";
 
    const { data: datataskID, mutate: taskIDMutate } = useCustomMutation(
-     url_GetTaskbyID,
-     "POST"
+      url_GetTaskbyID,
+      "POST"
    );
 
   const handleShowId = (e) => {
@@ -92,6 +114,7 @@ export const UserAddtask = () => {
     });
     
   }
+
 
   return (
     <div className="w-screen h-screen bg-gradient-to-t from-royalblue to-ivory ">
@@ -135,12 +158,11 @@ export const UserAddtask = () => {
 
               <div className=" font-text  text-lg flex  items-center justify-between mx-5 mt-2 ">
                 <span className="font-bold">Deadline:</span>{" "}
-                <div className='flex'>
+                <div className="flex">
                   <DatePicker
                     value={deadline}
                     onChange={(e) => SetDeadline(e.target.value)}
                   />
-                  
                 </div>
               </div>
             </div>
@@ -172,9 +194,9 @@ export const UserAddtask = () => {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
           >
-            {data ? (
-              data &&
-              data.map((field, index) => (
+            {dataFetch ? (
+              Array.isArray(dataFetch) &&
+              dataFetch.map((field, index) => (
                 <motion.div
                   className="flex font-text font-bold snap-center"
                   whileHover={{ scale: 0.9 }}
@@ -197,17 +219,13 @@ export const UserAddtask = () => {
                       {field.deadline}
                     </div>
                   </div>
-
-                  <div className="divider divider-horizontal font-text pl-10">
-                    Team
-                  </div>
-                  <div className="p-5 w-full">
-                    <div className="font-text">Team Assigned...</div>
-                  </div>
+                  
+                
                 </motion.div>
               ))
             ) : (
               <div className="flex flex-col justify-center items-center h-full font-body">
+                Loading Task
                 <span className="loading loading-dots loading-lg"></span>
               </div>
             )}
@@ -243,7 +261,7 @@ export const UserAddtask = () => {
             </div>
           ) : (
             <div className="flex flex-col justify-center items-center h-full font-body">
-              <span className="loading loading-dots loading-lg"></span>
+              Choose any Task To Show in this panel<span className="loading loading-dots loading-lg"></span>
             </div>
           )}
 

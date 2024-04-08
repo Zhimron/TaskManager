@@ -1,11 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { CalendarComp } from "../../assets/Components/CalendarComp";
-import { useCustomFetch } from "../../Hooks/useCustomFetch";
+
+import UseZustandGetId from "../../context/UseZustandGetId";
+import { useCustomMutation } from "../../Hooks/useCustomMutation";
 
 export const UserHome = () => {
+
+  const { userid } = UseZustandGetId();
+//post nalang
   const url_getTask = "http://127.0.0.1:8000/api/gettask";
+
   const [events, setEvents] = useState([]);
-   const { data } =useCustomFetch(url_getTask);
+
+  const { data , mutate } =useCustomMutation(url_getTask,"POST");
+
+  useEffect(()=>{
+    mutate({
+      user_id: userid,
+    });
+  },[]);
 
     useEffect(() => {
       if(data){

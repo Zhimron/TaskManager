@@ -12,6 +12,8 @@ import useLogout from "../../Hooks/useLogout";
 import Dropdown from "./Dropdown";
 import UseZustandLogin from "../../context/UseZustandLogin";
 import { jwtDecode } from "jwt-decode";
+import { useCustomFetch } from "../../Hooks/useCustomFetch";
+import UseZustandGetId from "../../context/UseZustandGetId";
 
 
 const HomeNavbar = () => {
@@ -19,17 +21,19 @@ const HomeNavbar = () => {
   const [changeCol, setChangeCol] = useState(location.pathname === "/Login");
   const [showList, setShowList] = useState(false);
   const [showLogout,setShowLogout] = useState(false);
+  const [isUser, setUser] = useState('');
 
 
   const handleLogout = useLogout();
 
   const handleLogoutClick = () => {
     handleLogout("Logout");
-
   };
 
+  const { isAuthenticatedId, toggleAuthToTrueId,  GetId } = UseZustandGetId();
   const { email, GetUser, isAuthenticated, toggleAuthToTrue } =
     UseZustandLogin();
+
   const handleClick = () =>{
    setShowList((prevState) => !prevState); 
   }
@@ -46,13 +50,13 @@ const HomeNavbar = () => {
   const handleChangeBack = () => {
     setChangeCol(false);
   };
+   
+  
 
   const access_token = localStorage.getItem("access_token");
   // const navigate = useNavigate();
 
    useEffect(() => {
-    
-
      if (!access_token) {
        setShowLogout(false);
      } else {
@@ -74,10 +78,23 @@ const HomeNavbar = () => {
        setShowLogout(true);
        // Decode JWT token
        GetUser(decodedToken.name);
+       setUser(decodedToken.name);
        toggleAuthToTrue();
-       console.log(isAuthenticated);
+       
+      
      }
    }, [access_token, toggleAuthToTrue,]);
+
+   const url_getID = "http://127.0.0.1:8000/api/user/" + isUser;
+   const { data } = useCustomFetch(url_getID);
+     
+         
+     useEffect(() => {
+       if (data) {
+         toggleAuthToTrueId();
+          GetId(data.identifier);
+       }
+     }, [data,toggleAuthToTrueId]);
 
   return (
     <motion.div
@@ -133,7 +150,7 @@ const HomeNavbar = () => {
                   text={"Task"}
                   to={"/Addtask"}
                 />
-                <NavBarIcon
+                {/* <NavBarIcon
                   icon={<MdOutlineAddTask size={30} />}
                   text={"Assign Task"}
                   to={"/AssignTask"}
@@ -146,7 +163,7 @@ const HomeNavbar = () => {
                 <NavBarIcon
                   icon={<FaUserCog size={30} />}
                   text={"User Roles"}
-                />
+                /> */}
               </motion.div>
             )}
           </motion.div>
