@@ -63,10 +63,10 @@ const AboutUs = memo(() => {
           {focus && (
             <motion.img
               initial={{ y: -400 }}
-              animate={{ y: -180 }}
-              transition={{ duration: 1 }}
+              animate={{ y: -50 }}
+              transition={{ duration: 1 ,type: "spring"}}
               src="/giphy.gif"
-              className="rounded-3xl mt-5 w-1/2 "
+              className="rounded-3xl mt-5 w-1/2 absolute"
             />
           )}
         </div>
