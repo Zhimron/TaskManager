@@ -63,6 +63,7 @@ const HomeNavbar = () => {
       const decodedToken = jwtDecode(access_token);
 
       const timestamp = decodedToken.exp;
+     
       const milliseconds = timestamp * 1000;
 
       const dateObject = new Date(milliseconds).toLocaleString("en-US", {
@@ -117,9 +118,9 @@ const HomeNavbar = () => {
         <NavLink to="/">
           <HomeNavBarIcon text={"Home"} onClick={handleChangeBack} />
         </NavLink>
-        {/* <NavLink to="/Aboutus">
+        <NavLink to="/Aboutus">
           <HomeNavBarIcon text={"About Us"} onClick={handleChangeBack} />
-        </NavLink> */}
+        </NavLink>
         {!showLogout && (
           <NavLink to="/Login">
             <HomeNavBarIcon text={"Login"} />

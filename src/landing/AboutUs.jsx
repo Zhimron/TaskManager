@@ -20,7 +20,7 @@ const AboutUs = memo(() => {
       <div className="w-full h-full flex justify-center md:p-10 items-center">
         <div className="flex flex-col items-center md:w-2/3 rounded-lg">
           <motion.img
-            src="/src/assets/pictures/walrus.png"
+            src="/walrus.png"
             className="md:w-1/6 md:h-1/4 w-2/5 h-1/6  mb-10"
             initial={{ rotate: -5 }}
             animate={{ rotate: 0 }}
@@ -65,7 +65,7 @@ const AboutUs = memo(() => {
               initial={{ y: -400 }}
               animate={{ y: -180 }}
               transition={{ duration: 1 }}
-              src="/src/assets/pictures/giphy.gif"
+              src="/giphy.gif"
               className="rounded-3xl mt-5 w-1/2 "
             />
           )}

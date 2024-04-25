@@ -131,7 +131,7 @@ import UseZustandLogin from "../context/UseZustandLogin";
           >
             <div className="flex flex-col mt-16 items-center w-2/3 h-2/3">
               <img
-                src="/src/assets/pictures/walrus.png"
+                src="/walrus.png"
                 className="w-20 h-20 mb-5"
               />
               <h1 className="font-body text-3xl">Tusk Manager</h1>
@@ -188,7 +188,7 @@ import UseZustandLogin from "../context/UseZustandLogin";
 
             <div className="flex flex-col mt-14 items-center w-2/3 h-2/3 ">
               <img
-                src="/src/assets/pictures/walrus.png"
+                src="/walrus.png"
                 className="w-1/4 h-1/4 mb-5"
               />
               <h1 className="font-body text-3xl">Tusk Manager</h1>
