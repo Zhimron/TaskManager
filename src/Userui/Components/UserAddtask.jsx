@@ -22,7 +22,13 @@ export const UserAddtask = () => {
     
   }
   
-  
+  const [project, SetProject] = useState("");
+  const [filteredData, setFilteredData] = useState([]);
+
+  const handleInputChange = (event) => {
+    SetProject(event.target.value.toLowerCase());
+  };
+
   const {userid} = UseZustandGetId();
 
   const url_getTask = "http://127.0.0.1:8000/api/gettask";
@@ -33,11 +39,26 @@ export const UserAddtask = () => {
   );
 
   useEffect(() => {
-    mutateData({
-      user_id: userid,
-    });
-  }, []);
+  mutateData({
+    user_id: userid,
+  });
+}, []);
+
+useEffect(() => {
+  if (dataFetch && project) {
+    const lowercaseProject = project.toLowerCase(); // Convert project to lowercase
+    const filteredTasks = dataFetch.filter(
+      (task) =>
+        task.project_name &&
+        task.project_name.toLowerCase() .includes(lowercaseProject)
+    );
+    setFilteredData(filteredTasks);
+  } else {
+    setFilteredData(dataFetch);
+  }
+}, [dataFetch, project]);
   
+   
   
 
   
@@ -65,9 +86,9 @@ export const UserAddtask = () => {
        task_description: description,
        task_category: typeOfTask,
        deadline: deadline,
-     });
-
+     });   
    };
+   
    const [showModal,SetShowModal] = useState(false);
    const [Message, SetMessage] = useState("");
    const [info, SetInfo] = useState("");
@@ -113,7 +134,8 @@ export const UserAddtask = () => {
     });
     
   }
-
+  
+  
 
   return (
     <div className="w-screen h-screen bg-gradient-to-t from-royalblue to-ivory ">
@@ -134,6 +156,9 @@ export const UserAddtask = () => {
             <IoMdAddCircle size={30} className="text-slate-800 ml-3" />
           </motion.div>
         </motion.div>
+        <div className="w-3/12 pl-16">
+          <InputDefault type="text" placeholder="Search Project" value={project}  onChange={handleInputChange}/>
+        </div>
         <motion.div
           className="ml-96 pl-10 flex items-center justify-end p-1 font-text "
           initial={{ y: -50, opacity: 0 }}
@@ -193,9 +218,9 @@ export const UserAddtask = () => {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
           >
-            {dataFetch ? (
-              Array.isArray(dataFetch) &&
-              dataFetch.map((field, index) => (
+            {filteredData ? (
+              Array.isArray(filteredData) &&
+              filteredData.map((field, index) => (
                 <motion.div
                   className="flex font-text font-bold snap-center"
                   whileHover={{ scale: 0.9 }}
@@ -218,8 +243,6 @@ export const UserAddtask = () => {
                       {field.deadline}
                     </div>
                   </div>
-                  
-                
                 </motion.div>
               ))
             ) : (
@@ -260,7 +283,8 @@ export const UserAddtask = () => {
             </div>
           ) : (
             <div className="flex flex-col justify-center items-center h-full font-body">
-              Choose any Task To Show in this panel<span className="loading loading-dots loading-lg"></span>
+              Choose any Task To Show in this panel
+              <span className="loading loading-dots loading-lg"></span>
             </div>
           )}
 
