@@ -14,6 +14,8 @@ import UseZustandLogin from "../../context/UseZustandLogin";
 import { jwtDecode } from "jwt-decode";
 import { useCustomFetch } from "../../Hooks/useCustomFetch";
 import UseZustandGetId from "../../context/UseZustandGetId";
+import { FaList } from "react-icons/fa";
+import { MdOutlineCloseFullscreen } from "react-icons/md";
 
 
 const HomeNavbar = () => {
@@ -129,7 +131,11 @@ const HomeNavbar = () => {
         {/* <div className="Home-navbar">hashash</div> */}
         {showLogout && (
           <motion.div onClick={handleClick}>
-            <HomeNavBarIcon text={"Menu"} />
+            <HomeNavBarIcon
+              text={"Menu"}
+              icon={showList ? <MdOutlineCloseFullscreen /> : <FaList />}
+            />
+
             {showList && (
               <motion.div
                 initial="hidden"
@@ -139,7 +145,7 @@ const HomeNavbar = () => {
                   hidden: { scale: 0 },
                   visible: { scale: 1 },
                 }}
-                className="bg-red-5 flex flex-col items-end p-5 bg-serenity rounded-2xl  bg-opacity-50  "
+                className="bg-red-5 flex  items-end p-5 bg-serenity rounded-2xl  bg-opacity-50  "
               >
                 <NavBarIcon
                   icon={<FaHome size={30} />}
@@ -151,20 +157,21 @@ const HomeNavbar = () => {
                   text={"Task"}
                   to={"/Addtask"}
                 />
-                {/* <NavBarIcon
+                <NavBarIcon
                   icon={<MdOutlineAddTask size={30} />}
                   text={"Assign Task"}
                   to={"/AssignTask"}
                 />
                 <NavBarIcon icon={<GrTasks size={30} />} text={"Progress"} />
-                <NavBarIcon
+                {/* <NavBarIcon
                   icon={<MdGroupAdd size={30} />}
                   text={"Create Team"}
-                />
+                  to={"/CreateTask"}
+                /> */}
                 <NavBarIcon
                   icon={<FaUserCog size={30} />}
                   text={"User Roles"}
-                /> */}
+                />
               </motion.div>
             )}
           </motion.div>

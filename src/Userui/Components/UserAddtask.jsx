@@ -31,6 +31,7 @@ export const UserAddtask = () => {
 
   const {userid} = UseZustandGetId();
 
+  
   const url_getTask = "http://127.0.0.1:8000/api/gettask";
   //post nalang
   const { data: dataFetch, mutate: mutateData } = useCustomMutation(
@@ -38,11 +39,13 @@ export const UserAddtask = () => {
     "POST"
   );
 
+
   useEffect(() => {
   mutateData({
     user_id: userid,
   });
 }, []);
+
 
 useEffect(() => {
   if (dataFetch && project) {
@@ -139,7 +142,7 @@ useEffect(() => {
 
   return (
     <div className="w-screen h-screen bg-gradient-to-t from-royalblue to-ivory ">
-      <div className="  text-4xl flex items-center text-green-700  mx-5  pt-32 ml-10">
+      <div className="  text-4xl flex items-center text-green-700  mx-5  pt-24 ml-10">
         <motion.div
           className="w-3/12 flex items-center justify-start p-1  font-body "
           whileTap={{ scale: 0.7 }}

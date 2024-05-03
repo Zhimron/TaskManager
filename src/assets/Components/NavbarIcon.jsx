@@ -4,10 +4,10 @@ import { motion } from "framer-motion";
 const NavBarIcon = ({ icon, text, onClick, to }) => (
   <Link to={to}>
     <motion.div
-      className="navbar-icon group"
+      className="navbar-icon group flex-col"
       onClick={onClick}
       whileHover={{ scale: 0.85 }}
-      transition={{duration: 0.01}}
+      transition={{ duration: 0.01 }}
     >
       {icon}
 
