@@ -117,16 +117,18 @@ const HomeNavbar = () => {
       </div>
       {/* <div className="flex "> */}
       <div className="flex font-body font-medium text-xl mr-14 scale-0 md:scale-100">
-        <NavLink to="/">
-          <HomeNavBarIcon text={"Home"} onClick={handleChangeBack} />
-        </NavLink>
-        <NavLink to="/Aboutus">
-          <HomeNavBarIcon text={"About Us"} onClick={handleChangeBack} />
-        </NavLink>
         {!showLogout && (
-          <NavLink to="/Login">
-            <HomeNavBarIcon text={"Login"} />
-          </NavLink>
+          <>
+            <NavLink to="/">
+              <HomeNavBarIcon text={"Home"} onClick={handleChangeBack} />
+            </NavLink>
+            <NavLink to="/Aboutus">
+              <HomeNavBarIcon text={"About Us"} onClick={handleChangeBack} />
+            </NavLink>
+            <NavLink to="/Login">
+              <HomeNavBarIcon text={"Login"} />
+            </NavLink>
+          </>
         )}
         {/* <div className="Home-navbar">hashash</div> */}
         {showLogout && (
@@ -145,7 +147,7 @@ const HomeNavbar = () => {
                   hidden: { scale: 0 },
                   visible: { scale: 1 },
                 }}
-                className="bg-red-5 flex  items-end p-5 bg-serenity rounded-2xl  bg-opacity-50  "
+                className="bg-red-5 flex items-end p-5 bg-serenity rounded-2xl  bg-opacity-50  "
               >
                 <NavBarIcon
                   icon={<FaHome size={30} />}
@@ -157,11 +159,11 @@ const HomeNavbar = () => {
                   text={"Task"}
                   to={"/Addtask"}
                 />
-                <NavBarIcon
+                {/* <NavBarIcon
                   icon={<MdOutlineAddTask size={30} />}
                   text={"Assign Task"}
                   to={"/AssignTask"}
-                />
+                /> */}
                 <NavBarIcon icon={<GrTasks size={30} />} text={"Progress"} />
                 {/* <NavBarIcon
                   icon={<MdGroupAdd size={30} />}

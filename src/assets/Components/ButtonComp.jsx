@@ -3,7 +3,7 @@ import React from 'react'
 export const ButtonComp = ({children}) => {
   return (
     <div
-      className="mt-5  w-5/6 "
+      className="mt-5  w-full"
      
     >
       <button

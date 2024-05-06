@@ -12,6 +12,9 @@ import { motion } from 'framer-motion';
 import { useCustomMutation } from '../../Hooks/useCustomMutation';
 import Modal from '../../assets/Components/Modal';
 import UseZustandGetId from '../../context/UseZustandGetId';
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import { AssignTask } from './AssignTask';
+
 
 
 export const UserAddtask = () => {
@@ -61,9 +64,7 @@ useEffect(() => {
   }
 }, [dataFetch, project]);
   
-   
   
-
   
    const [deadline, SetDeadline] = useState('');
   //  const [time, SetTime] = useState("");
@@ -130,7 +131,7 @@ useEffect(() => {
       url_GetTaskbyID,
       "POST"
    );
-
+const [Assign, SetAssign] = useState(true);
   const handleShowId = (e) => {
     taskIDMutate({
       id:e
@@ -139,13 +140,19 @@ useEffect(() => {
   }
   
   
+const handleShowAssign = () => {
+  SetAssign((prevState) => !prevState);
+  console.log(Assign);
+}
+  
+  
 
   return (
     <div className="w-screen h-screen bg-gradient-to-t from-royalblue to-ivory ">
-      <div className="  text-4xl flex items-center text-green-700  mx-5  pt-24 ml-10">
+      <div className="  text-4xl flex   text-green-700  mx-5  pt-24 ml-10">
         <motion.div
           className="w-3/12 flex items-center justify-start p-1  font-body "
-          whileTap={{ scale: 0.7 }}
+          whileTap={{ scale: 0.9 }}
           onClick={handleChange}
           whileHover={{ scale: 1 }}
         >
@@ -159,18 +166,41 @@ useEffect(() => {
             <IoMdAddCircle size={30} className="text-slate-800 ml-3" />
           </motion.div>
         </motion.div>
-        <div className="w-3/12 pl-16">
-          <InputDefault type="text" placeholder="Search Project" value={project}  onChange={handleInputChange}/>
+
+        <div className="w-3/12 pl-20 ">
+          <InputDefault
+            type="text"
+            placeholder="Search Project"
+            value={project}
+            onChange={handleInputChange}
+          />
         </div>
-        <motion.div
-          className="ml-96 pl-10 flex items-center justify-end p-1 font-text "
-          initial={{ y: -50, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 2, y: { type: "spring" } }}
-        >
-          <Link>About The Task</Link>{" "}
-        </motion.div>
+
+        {Assign ? (
+          <motion.div
+            className="ml-96 pl-24 flex items-center  p-1 font-text"
+            whileTap={{ scale: 0.7 }}
+            initial={{ y: -50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ y: { type: "spring", duration: 2 } }}
+            onClick={handleShowAssign}
+          >
+            <Link>Assign Task</Link> <FaArrowRight className="ml-2" />
+          </motion.div>
+        ) : (
+          <motion.div
+            className="ml-96 pl-10 flex items-center  p-1 font-text"
+            initial={{ y: -50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 2, y: { type: "spring" } }}
+            onClick={handleShowAssign}
+          >
+            <Link>About The Task</Link>
+            <FaArrowLeft className="ml-2" />
+          </motion.div>
+        )}
       </div>
+
       <div className=" w-full mt-5 burger flex ">
         {showModal && <Modal messageBool={Message} Info={info} />}
         {isShow ? (
@@ -210,8 +240,9 @@ useEffect(() => {
                 value={typeOfTask}
                 onChange={(e) => SetTypeOfTask(e.target.value)}
               />
-
-              <ButtonComp children={"Add Task"} />
+              <div className='w-full px-16'>
+                <ButtonComp children={"Add Task"} />
+              </div>
             </div>
           </form>
         ) : (
@@ -264,31 +295,38 @@ useEffect(() => {
         >
           {/* {Array.isArray(datataskID) &&
             datataskID.map((datas, index) => ( */}
-
-          {datataskID ? (
-            <div className="flex">
-              <div className="p-5 w-full h-full">
-                <div className="font-text font-bold text-3xl bg-slate-500 text-white uppercase rounded-md pl-3 py-5 bg-opacity-50 flex justify-center  ">
-                  {datataskID.project_name}
-                </div>
-                <div className="pl-3  flex mt-5 ">
-                  <p className="font-body text-green-800">Type:</p>{" "}
-                  <p className="font-text">{datataskID.task_category} </p>
-                </div>
-                <div className=" pl-3 mt-5 flex">
-                  <p className="font-body text-green-800">Deadline:</p>
-                  <p className="font-text">{datataskID.deadline}</p>
-                </div>
-                <div className="p-5  tracking-wider  mt-5 rounded-lg font-text text-justify text-wrap break-all border-2 border-indigo-950">
-                  {datataskID.task_description}
-                </div>
-              </div>
-            </div>
+          {Assign ? (
+            <>
+              <AssignTask />
+            </>
           ) : (
-            <div className="flex flex-col justify-center items-center h-full font-body">
-              Choose any Task To Show in this panel
-              <span className="loading loading-dots loading-lg"></span>
-            </div>
+            <>
+              {datataskID ? (
+                <div className="flex">
+                  <div className="p-5 w-full h-full">
+                    <div className="font-text font-bold text-3xl bg-slate-500 text-white uppercase rounded-md pl-3 py-5 bg-opacity-50 flex justify-center  ">
+                      {datataskID.project_name}
+                    </div>
+                    <div className="pl-3  flex mt-5 ">
+                      <p className="font-body text-green-800">Type:</p>{" "}
+                      <p className="font-text">{datataskID.task_category} </p>
+                    </div>
+                    <div className=" pl-3 mt-5 flex">
+                      <p className="font-body text-green-800">Deadline:</p>
+                      <p className="font-text">{datataskID.deadline}</p>
+                    </div>
+                    <div className="p-5  tracking-wider  mt-5 rounded-lg font-text text-justify text-wrap break-all border-2 border-indigo-950">
+                      {datataskID.task_description}
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <div className="flex flex-col justify-center items-center h-full font-body">
+                  Choose any Task To Show in this panel
+                  <span className="loading loading-dots loading-lg"></span>
+                </div>
+              )}
+            </>
           )}
 
           {/* ))} */}
