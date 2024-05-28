@@ -24,3 +24,21 @@
        transition-all duration-200 ease-linear cursor-pointer ;    
   }
 }
+/* Add this in your CSS file or within a <style> block in your HTML */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 12px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: #005119;
+    border-radius: 10px;
+    border: 3px solid #f1f1f1;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #017526;
+}

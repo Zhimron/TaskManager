@@ -247,7 +247,7 @@ const handleShowAssign = () => {
           </form>
         ) : (
           <motion.div
-            className="flex flex-col ml-10 rounded-3xl bg-ivory bg-opacity-25 py-5 px-10 w-3/6 shadow-md h-[37em] overflow-auto scroll-smooth snap-y"
+            className="flex flex-col ml-10 rounded-3xl bg-ivory bg-opacity-25 py-5 px-10 w-3/6 shadow-md h-[37em] overflow-auto custom-scrollbar scroll-smooth snap-y"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
@@ -297,7 +297,7 @@ const handleShowAssign = () => {
             datataskID.map((datas, index) => ( */}
           {isShow ? (
             <>
-              <AssignTask children={userid}/>
+              <AssignTask children={userid} />
             </>
           ) : (
             <>

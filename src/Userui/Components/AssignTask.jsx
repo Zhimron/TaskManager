@@ -70,7 +70,7 @@ export const AssignTask = ( {children}) => {
             value={teams}
             onChange={(e) => setTeams(e.target.value)}
           />
-          <div className="border-2 mr-5 overflow-y-scroll h-96 w-full mt-5">
+          <div className="border-2 mr-5 overflow-y-scroll custom-scrollbar h-96 w-full mt-5">
             <table className="table table-xs table-pin-rows table-pin-cols">
               {/* head */}
               <thead>
@@ -87,30 +87,30 @@ export const AssignTask = ( {children}) => {
               </thead>
               <tbody>
                 {/* row 1 */}
-                {datas ? (
-                  <>
-                    {Array.isArray(datas) &&
-                      datas.map((task, index) => (
-                        <tr className="font-text text-xl" key={task.id}>
-                          <td>
-                            <input
-                              type="checkbox"
-                              className="checkbox p-4 m-2 flex justify-center"
-                              onChange={() => handleCheckboxChange(task.id)}
-                            />
-                          </td>
-                          <td className="text-green-600">{index + 1}</td>
-                          <td>{task.project_name}</td>
-                          <td>{task.task_category}</td>
-                          <td>{task.task_category}</td>
-                          <td>{task.created_at}</td>
-                          <td>{task.deadline}</td>
-                        </tr>
-                      ))}
-                  </>
+                {/* {datas ? (
+                  <> */}
+                {Array.isArray(datas) &&
+                  datas.map((task, index) => (
+                    <tr className="font-text text-xl" key={task.id}>
+                      <td>
+                        <input
+                          type="checkbox"
+                          className="checkbox p-4 m-2 flex justify-center"
+                          onChange={() => handleCheckboxChange(task.id)}
+                        />
+                      </td>
+                      <td className="text-green-600">{index + 1}</td>
+                      <td>{task.project_name}</td>
+                      <td>{task.task_category}</td>
+                      <td>{task.task_category}</td>
+                      <td>{task.created_at}</td>
+                      <td>{task.deadline}</td>
+                    </tr>
+                  ))}
+                {/* </>
                 ) : (
-                 <div>jaha</div>
-                )}
+                 <div className="flex justify-center items-center">No Task to Assign</div>
+                )} */}
               </tbody>
             </table>
           </div>

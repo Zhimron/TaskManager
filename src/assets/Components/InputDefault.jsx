@@ -2,7 +2,7 @@ import React from "react";
 
 const InputDefault = ({ type, placeholder, icon: Icon, value, onChange }) => {
   return (
-    <div className="mt-6 h- w-5/6 ">
+    <div className="mt-6 h- w-full ">
       <label className="input input-bordered flex items-center gap-2 font-text">
         {Icon && <Icon />}
         <input

@@ -30,9 +30,9 @@ export const ComboboxTeams = ({ value, onChange }) => {
               className="bg-ivory text-black"
               // value="bg-green-400"
               key={item.id}
-              Value={item.team_name}
+              Value={item.id}
             >
-            {item.team_name}
+              {item.team_name}
             </option>
           ))}
       </select>
