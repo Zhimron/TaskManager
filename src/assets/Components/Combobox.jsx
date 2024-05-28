@@ -9,7 +9,7 @@ export const Combobox = ({ value, onChange }) => {
   // };
 
   return (
-    <div className="mt-2 w-5/6">
+    <div className="mt-2 w-full">
       <select
         className={`select select-bordered w-full font-text text-sm text-slate-700  ${selectedColor} `}
         value={value}

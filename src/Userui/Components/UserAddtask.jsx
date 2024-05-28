@@ -206,44 +206,51 @@ const handleShowAssign = () => {
         {isShow ? (
           <form
             onSubmit={handleSubmitTask}
-            className="flex flex-col ml-10 rounded-3xl bg-ivory bg-opacity-25 py-12 items-center w-3/6 shadow-md h-[37em] "
+            className="flex flex-col ml-10 rounded-3xl bg-ivory bg-opacity-25  items-center w-3/6 shadow-md h-[37em] "
           >
-            <div className="  w-full flex flex-col px-12 ">
-              {/* <div className="font-text text-lg flex items-center justify-between mx-5 mt-3 ">
+            <section className='w-full mt-8'>
+              <div className="  w-full flex flex-col px-5 ">
+                {/* <div className="font-text text-lg flex items-center justify-between mx-5 mt-3 ">
               <span className=" font-bold">Start Date:</span> <DatePicker />
             </div> */}
-
-              <div className=" font-text  text-lg flex  items-center justify-between mx-5 mt-2 ">
-                <span className="font-bold">Deadline:</span>{" "}
-                <div className="flex">
-                  <DatePicker
-                    value={deadline}
-                    onChange={(e) => SetDeadline(e.target.value)}
-                  />
+                <div className=" font-text  text-lg flex  items-center justify-between  ">
+                  <span className="font-bold">Deadline:</span>{" "}
+                  <div className="flex">
+                    <DatePicker
+                      value={deadline}
+                      onChange={(e) => SetDeadline(e.target.value)}
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div className="w-full flex flex-col font-body items-center   ">
-              <InputDefault
-                type="text"
-                placeholder="Project Name"
-                value={projectName}
-                onChange={(e) => SetProjectName(e.target.value)}
-              />
-              <TextArea
-                placeholder="Description of Task"
-                value={description}
-                onChange={(e) => SetDescription(e.target.value)}
-              />
-              <Combobox
-                value={typeOfTask}
-                onChange={(e) => SetTypeOfTask(e.target.value)}
-              />
-              <div className="w-full px-16">
-                <ButtonComp children={"Add Task"} />
-              </div>
-            </div>
+              <section className="w-full flex flex-col font-body items-center px-5 ">
+                <div className="w-full">
+                  <InputDefault
+                    type="text"
+                    placeholder="Project Name"
+                    value={projectName}
+                    onChange={(e) => SetProjectName(e.target.value)}
+                  />
+                </div>
+                <div className="w-full">
+                  <TextArea
+                    placeholder="Description of Task"
+                    value={description}
+                    onChange={(e) => SetDescription(e.target.value)}
+                  />
+                </div>
+                <div className="w-full">
+                  <Combobox
+                    value={typeOfTask}
+                    onChange={(e) => SetTypeOfTask(e.target.value)}
+                  />
+                </div>
+                <div className="w-full ">
+                  <ButtonComp children={"Add Task"} />
+                </div>
+              </section>
+            </section>
           </form>
         ) : (
           <motion.div
