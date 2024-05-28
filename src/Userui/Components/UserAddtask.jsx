@@ -75,7 +75,6 @@ useEffect(() => {
 
    const url_addTask = "http://127.0.0.1:8000/api/addtask";
    const { data: dataMutation , mutate: taskMutate } = useCustomMutation(url_addTask,"POST");
-
    const handleSubmitTask =(e)=>{
    e.preventDefault();
    if (!projectName || !deadline || !description || !typeOfTask) {
@@ -90,7 +89,9 @@ useEffect(() => {
        task_description: description,
        task_category: typeOfTask,
        deadline: deadline,
-     });   
+     });  
+     
+     
    };
    
    const [showModal,SetShowModal] = useState(false);
@@ -139,7 +140,6 @@ const [Assign, SetAssign] = useState(true);
     
   }
   
-  
 const handleShowAssign = () => {
   SetAssign((prevState) => !prevState);
   console.log(Assign);
@@ -149,9 +149,9 @@ const handleShowAssign = () => {
 
   return (
     <div className="w-screen h-screen bg-gradient-to-t from-royalblue to-ivory ">
-      <div className="  text-4xl flex   text-green-700  mx-5  pt-24 ml-10">
+      <div className="  text-4xl flex   text-green-700  mx-10  pt-20 ml-10 ">
         <motion.div
-          className="w-3/12 flex items-center justify-start p-1  font-body "
+          className="w-3/12 flex items-center justify-start p-5  font-body "
           whileTap={{ scale: 0.9 }}
           onClick={handleChange}
           whileHover={{ scale: 1 }}
@@ -167,7 +167,7 @@ const handleShowAssign = () => {
           </motion.div>
         </motion.div>
 
-        <div className="w-3/12 pl-20 ">
+        <div className="w-3/12 pl-20 pb-1 ">
           <InputDefault
             type="text"
             placeholder="Search Project"
@@ -176,7 +176,7 @@ const handleShowAssign = () => {
           />
         </div>
 
-        {Assign ? (
+        {isShow ? (
           <motion.div
             className="ml-96 pl-24 flex items-center  p-1 font-text"
             whileTap={{ scale: 0.7 }}
@@ -189,19 +189,19 @@ const handleShowAssign = () => {
           </motion.div>
         ) : (
           <motion.div
-            className="ml-96 pl-10 flex items-center  p-1 font-text"
+            className="ml-96 pl-24 flex items-center  p-1 font-text"
             initial={{ y: -50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 2, y: { type: "spring" } }}
             onClick={handleShowAssign}
           >
-            <Link>About The Task</Link>
+            <Link>Task Detail</Link>
             <FaArrowLeft className="ml-2" />
           </motion.div>
         )}
       </div>
 
-      <div className=" w-full mt-5 burger flex ">
+      <div className=" w-full mt-1 burger flex ">
         {showModal && <Modal messageBool={Message} Info={info} />}
         {isShow ? (
           <form
@@ -240,7 +240,7 @@ const handleShowAssign = () => {
                 value={typeOfTask}
                 onChange={(e) => SetTypeOfTask(e.target.value)}
               />
-              <div className='w-full px-16'>
+              <div className="w-full px-16">
                 <ButtonComp children={"Add Task"} />
               </div>
             </div>
@@ -288,16 +288,16 @@ const handleShowAssign = () => {
           </motion.div>
         )}
         <motion.div
-          className="flex flex-col mx-10 rounded-3xl bg-ivory bg-opacity-50 py-5 px-10 w-3/6 shadow-md h-[37em]"
+          className="flex flex-col mx-10 rounded-3xl bg-ivory bg-opacity-50 py-5 px-5 w-3/6 shadow-md h-[37em]"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 2 }}
         >
           {/* {Array.isArray(datataskID) &&
             datataskID.map((datas, index) => ( */}
-          {Assign ? (
+          {isShow ? (
             <>
-              <AssignTask />
+              <AssignTask children={userid}/>
             </>
           ) : (
             <>

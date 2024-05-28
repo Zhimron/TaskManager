@@ -7,7 +7,7 @@ import { useCustomMutation } from "../../Hooks/useCustomMutation";
 export const UserHome = () => {
 
   const { userid } = UseZustandGetId();
-//post nalang
+  //post nalang
   const url_getTask = "http://127.0.0.1:8000/api/gettask";
 
   const [events, setEvents] = useState([]);
@@ -24,6 +24,7 @@ export const UserHome = () => {
       if(data){
           setEvents(
             data.map((event) => ({
+              localizer: event.task_description,
               title: event.project_name,
               start: new Date(event.deadline),
               end: new Date(event.deadline),
